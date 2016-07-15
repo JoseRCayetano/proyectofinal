@@ -1,0 +1,45 @@
+<nglandingmenu></nglandingmenu>
+
+<div class="container" ng-controller="formRegisterController">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2 vcenter">
+      <div class="form-box">
+        <div class="form-top">
+          <div class="form-top-left">
+            <h3>Regístrate Ahora</h3>
+            <p>Y disfruta del mejor cine en la mejor compañía!</p>
+          </div>
+          <div class="form-top-right">
+            <i class="fa fa-pencil"></i>
+          </div>
+        </div>
+        <div class="form-bottom">
+        <form role="form" action=""  class="registration-form">
+            <div class="form-group">
+              <label class="sr-only label-floating" for="form-user-name">Username</label>
+              <input type="text" name="form-user-name" placeholder="User name..." class="form-user-name form-control" id="form-user-name" ng-model="user" required>
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="form-password">Password</label>
+              <input type="password" name="form-password" placeholder="Passowrd.." class="form-password form-control" id="form-password" ng-model="password">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="form-first-name">first name</label>
+              <input type="text" name="user" placeholder="first name..." class="form-first-name form-control" id="form-first-name" ng-model="firstname">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="form-last-name">Last name</label>
+              <input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" ng-model="lastname">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="form-email">Email</label>
+              <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" ng-model="email">
+            </div>
+
+            <button type="button" class="btn btn-raised btn-primary" ng-click="save()">Sign me up!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
