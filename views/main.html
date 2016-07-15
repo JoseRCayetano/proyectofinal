@@ -1,1 +1,64 @@
-<p>Wellcome</p>
+<usermenu></usermenu>
+<div  class="container" ng-controller="mainController">
+	<!-- Menu -->
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<!--<button class="btn btn-default" type="button">Go!</button>-->
+					<i class="material-icons">search</i> 
+				</span>
+				<input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+			</div><!-- /input-group -->
+		</div><!-- /.col-lg-6 -->
+
+	</div><!-- /.row -->
+	<div class="row" id="cartelera">
+		<div class="col-md-2" ng-repeat="pelicula in cartelera | filter:({title: search} || {genres: search})">
+			<article>
+				<div class="card">
+					<div><img ng-src="{{pelicula.img_url}}" class="img-responsive"/></div>
+					<div>
+						<ul class="list-unstyled list-inline">
+							<li><span class="glyphicon glyphicon-heart-empty"></span></li>
+							<li><span class="glyphicon glyphicon-facetime-video"></span></li>
+							
+						</ul>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-lg-3"></div>
+
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-height-indicator"></div>
+
+			<div class="card-content">
+
+				<div class="card-image">
+				<img src="./img/cartelera/alicia.jpg" alt="Loading image...">
+					<h3 class="card-image-headline">Lorem Ipsum Dolor</h3>
+				</div>
+
+				<div class="card-body">
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div>
+
+				<footer class="card-footer">
+					<button class="btn btn-flat">Share</button>
+					<button class="btn btn-flat btn-warning">Learn More</button>
+				</footer>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col-lg-3"></div>
+</div>

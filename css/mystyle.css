@@ -1,8 +1,12 @@
-img {
-  height: 100px;
+article {
+  /*height: 100px;*/
+  height: 300px;
 }
 .vcenter {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+#cartelera article{
+	margin-top: 20px;
 }

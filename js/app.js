@@ -15,14 +15,18 @@ app.config(['$routeProvider',function($routeProvider) {
 	}).when("/post",{
 		templateUrl: "db/dbController.php"
 	})
-
-
 	.otherwise({
 		redirectTo: "/",
 		
 	})
 }]);
 
+app.controller("mainController",["$scope","$http",function($scope,$http){
+	$http.get("db/cartelera.json").success (function (data){
+        $scope.cartelera= data;
+
+    });
+}])
 
 //Active menu
 app.controller("menuController",["$scope","$location",function($scope,$location){
@@ -174,5 +178,13 @@ app.directive('nglandingmenu',function(){
 	return{
 		restrict: 'E', // PAra custom de html
 		templateUrl: 'views/landing_menu.html'
+	}
+})
+
+//CUstome directive to load user menu
+app.directive('usermenu',function(){
+	return{
+		restrict: 'E', // PAra custom de html
+		templateUrl: 'views/user_menu.html'
 	}
 })
