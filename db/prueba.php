@@ -46,6 +46,8 @@ function newUser($data){
 	file_put_contents($file, $jsonData);
 }
 function newFavoriteMovie ($data){
+
+	$buttonPressed = $data->buttonPressed;
 	$file = $data->file; //File to read/write
 
 	$userPosition = (int)$data->userPosition; //Position user
@@ -54,7 +56,6 @@ function newFavoriteMovie ($data){
 	$newMovie = [];
 	$newMovie["title"] = $data->newViewedMovie;
 	$newMovie["duration"] = $data->duration;
-
 	$newMovie["genders"] = $data->genders;
 		
 	$tempArray = json_decode(file_get_contents($file));
@@ -69,10 +70,12 @@ function deleteFavoriteMovie ($data){
 
 	$userPosition = (int)$data->userPosition; //Position user
 	$moviePosition = (int)$data->moviePosition;
-	echo $moviePosition;
+	
+	
 	$tempArray = json_decode(file_get_contents($file));
 
-	unset($tempArray[$userPosition]->viewed[$moviePosition]);
+	//unset($tempArray[$userPosition]->viewed[$moviePosition]);
+	array_splice($tempArray[$userPosition]->viewed,$moviePosition,1);
 	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
 	

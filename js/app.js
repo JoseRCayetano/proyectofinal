@@ -14,11 +14,14 @@ app.config(['$routeProvider',function($routeProvider) {
 		templateUrl: "views/main.html"
 	}).when("/post",{
 		templateUrl: "db/dbController.php"
+	}).when("/movie/:title",{
+		templateUrl: "views/movie.html"
 	})
 	.otherwise({
 		redirectTo: "/",
 		
 	})
+
 }]);
 //Factory to do pettition to the DB
 /*
@@ -49,20 +52,17 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
     });
 
     //Function viewed film
-    $scope.checkViewedFilm = function (title,duration,genders){
-    	checkInUserDb(title,duration,genders);
-    }
-    function checkInUserDb(movie,duration,genders){
+    $scope.checkFilm = function (buttonPressed,movie,duration,genders){
     	$http.get("db/users.json").success(function (data){
 
     		var userPosition = getUserPosition(data,$localStorage.user);
     		var moviePosition = getViewedMoviePosition(data,userPosition,movie);
-    		console.log(moviePosition)
-    		console.log(movie);
-    		console.log(userPosition);
-    		console.log(moviePosition);
+    		console.log("Posicion peli --> "+moviePosition)
+    		console.log("Nombre peli --> "+movie);
+    		console.log("Posicion user -->"+userPosition);
     		//Si no está lo meto
     		if (moviePosition === -1){
+    			console.log("no esta")
     			var method = 'POST';
 				var url = 'db/prueba.php';
 				var FormData = {
@@ -85,15 +85,19 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 				}).
 				success(function(response) {
 					//$scope.codeStatus = response.data;
-					console.log(response)
+					console.log("meto peli");
+					$http.get("db/users.json").success(function (dataDb){
+						$localStorage.users = dataDb;
+
+					});
 				}).
 				error(function(response) {
 					console.log("mal")
-					//$scope.codeStatus = response || "Request failed";
+					$scope.codeStatus = response || "Request failed";
 				});
 
 	    	}else{// si está se elimina
-	    		console.log("Winnn")
+	    		console.log("si esta");
 	    		var method = 'POST';
 				var url = 'db/prueba.php';
 				var FormData = {
@@ -114,7 +118,11 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 				}).
 				success(function(response) {
 					$scope.codeStatus = response.data;
-					console.log(response)
+					console.log("Elimino peli-->"+response.data)
+					$http.get("db/users.json").success(function (dataDb){
+						$localStorage.users = dataDb;
+					})
+
 				}).
 				error(function(response) {
 					console.log("mal")
@@ -122,8 +130,8 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 				});
 
 	    	}
-    		
-	});
+    })
+   
 }
 
     //Get user poition
@@ -140,6 +148,18 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
     }
     
 
+}])
+
+
+//Movie file controller
+
+app.controller("movieController",["$scope","$http","$routeParams", function ($scope,$http,$routeParams){
+	$scope.title = $routeParams.title;
+	$http.get("db/cartelera.json").success (function (data){
+        $scope.cartelera= data;
+        $scope.dataLoaded = true;
+
+    });
 }])
 
 //Active menu
@@ -256,7 +276,7 @@ app.controller("carouselController", function ($scope) {
 		assignNewIndexesToSlides(indexes);
 	};
 
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < 5; i++) {
 		$scope.addSlide();
 	}
 

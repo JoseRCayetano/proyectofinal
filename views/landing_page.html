@@ -1,9 +1,9 @@
 	<nglandingmenu></nglandingmenu>
 	<div ng-controller="carouselController">
-		<div style="height:300px; width: 100%;max-height: 500px">
+		<div style="">
 			<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
 				<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-					<img ng-src="{{slide.image}}" style="margin:auto;">
+					<img  class="img-responsive" ng-src="{{slide.image}}" style="margin:auto;">
 					<div class="carousel-caption">
 						<h4>{{slide.text}}</h4>
 					</div>

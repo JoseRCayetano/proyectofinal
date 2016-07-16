@@ -1,0 +1,29 @@
+<usermenu></usermenu>
+<navigatorusermenu></navigatorusermenu>
+
+<div id="movieFile" class="container" ng-controller="movieController">
+	<article ng-repeat="pelicula in cartelera | filter:{title: title}:true">
+		<div class="row">
+			<div class="col-md-4">
+				<img class="img-responsive  " ng-src="{{pelicula.img_url}}" />
+			</div>
+			<div class="col-md-8">
+				<!--Datos & boton evento & boton mapa boton seleccion cine -->
+				<h2>{{pelicula.title}}</h2>
+				<ul class="list-unstyled list-inline">
+					<li ng-repeat="gender in pelicula.genders">{{gender}}</li>
+				</ul>
+				<p>{{pelicula.synopsis}}</p>
+				<p>{{pelicula.duration}} min</p>
+				<ul class="list-unstyled">
+					<li ng-repeat="cine in pelicula.cines">{{cine.name}}</li>
+				</ul>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">Comentarios peli</div>
+		</div>
+	</article>	
+</div>
+<!-- Footer-->

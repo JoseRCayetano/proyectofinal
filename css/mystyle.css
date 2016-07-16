@@ -22,3 +22,14 @@ article {
 .red {
 	color:red;
 }
+.img-movie{
+	height: 500px;
+	width: 300px;
+}
+.input-group{
+	background-color: white!important;
+}
+.navbar {
+	margin-bottom: 0;
+}
+

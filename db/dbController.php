@@ -1,5 +1,5 @@
 <?php
-
+/*
 switch ($_POST['fichero']) {
 
     case 'users':
@@ -43,7 +43,7 @@ function newUser(){
         //reemplaza los datos anteriores del archivo json con los nuevos datos
     file_put_contents($file, $jsonData);
 }
-
+*/
 /*
 function updateUser(){
     $file = $_POST['file'];
