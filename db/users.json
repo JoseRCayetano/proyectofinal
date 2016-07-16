@@ -1,35 +1,44 @@
 [
-  {
-    "id": "1",
-    "user": "user1",
-    "pass": "pass1",
-    "name": "usuario1",
-    "apellido": "apellido1",
-    "email": "email1@mail.com",
-    "viewed": [],
-    "bookmark": [],
-    "favorite":[]
-  },
-  {
-    "id": "2",
-    "user": "user2",
-    "pass": "pass2",
-    "name": "usuario2",
-    "apellido": "apellido2",
-    "email": "email2@mail.com",
-    "viewed": [],
-    "bookmark": [],
-    "favorite":[]
-  },
-  {
-    "id": "3",
-    "user": "user3",
-    "pass": "pass3",
-    "name": "usuario3",
-    "apellido": "apellido3",
-    "email": "email3@mail.com",
-    "viewed": [],
-    "bookmark": [],
-    "favorite":[]
-  }
+    {
+        "id": "1",
+        "user": "user1",
+        "pass": "pass1",
+        "name": "usuario1",
+        "apellido": "apellido1",
+        "email": "email1@mail.com",
+        "viewed": [],
+        "bookmark": [],
+        "favorite": []
+    },
+    {
+        "id": "2",
+        "user": "user2",
+        "pass": "pass2",
+        "name": "usuario2",
+        "apellido": "apellido2",
+        "email": "email2@mail.com",
+        "viewed": [
+            {
+                "title": "Antes de ti",
+                "duration": "110",
+                "genders": [
+                    "Drama",
+                    "Romance"
+                ]
+            }
+        ],
+        "bookmark": [],
+        "favorite": []
+    },
+    {
+        "id": "3",
+        "user": "user3",
+        "pass": "pass3",
+        "name": "usuario3",
+        "apellido": "apellido3",
+        "email": "email3@mail.com",
+        "viewed": [],
+        "bookmark": [],
+        "favorite": []
+    }
 ]

@@ -16,6 +16,9 @@ switch ($data->file){
 			case 'newFavoriteMovie':
 				newFavoriteMovie ($data);
 			break;
+			case 'deleteFavoriteMovie':
+				deleteFavoriteMovie ($data);
+			break;
 		}
 	break;
 }
@@ -49,17 +52,28 @@ function newFavoriteMovie ($data){
 	
 	//New object movie
 	$newMovie = [];
-	$newMovie["title"] = utf8_decode($data->newViewedMovie);
-	$newMovie["duration"] = utf8_decode($data->duration);
+	$newMovie["title"] = $data->newViewedMovie;
+	$newMovie["duration"] = $data->duration;
 
-	for ($i = 0; $i < count($data->genders); $i++){
-		$data->genders[$i] = utf8_decode($data->genders[$i]);
-	}
 	$newMovie["genders"] = $data->genders;
 		
 	$tempArray = json_decode(file_get_contents($file));
 	array_push($tempArray[$userPosition]->viewed,$newMovie);
-	$jsonData = json_encode($tempArray,JSON_PRETTY_PRINT);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+	
+}
+
+function deleteFavoriteMovie ($data){
+	$file = $data->file; //File to read/write
+
+	$userPosition = (int)$data->userPosition; //Position user
+	$moviePosition = (int)$data->moviePosition;
+	echo $moviePosition;
+	$tempArray = json_decode(file_get_contents($file));
+
+	unset($tempArray[$userPosition]->viewed[$moviePosition]);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
 	
 }

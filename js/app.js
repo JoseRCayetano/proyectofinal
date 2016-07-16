@@ -20,6 +20,25 @@ app.config(['$routeProvider',function($routeProvider) {
 		
 	})
 }]);
+//Factory to do pettition to the DB
+/*
+app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
+	var request = {};
+	
+	request.send = function (){
+		$http.post({method,url,formData,headers}).
+		success(function(response) {
+			$scope.codeStatus = response.data;
+			console.log(response)
+		}).
+		error(function(response) {
+			console.log("mal")
+			$scope.codeStatus = response || "Request failed";
+		});
+
+	}
+
+}])*/
 
 app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
 	$scope.dataLoaded = false;
@@ -38,9 +57,11 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
     		var userPosition = getUserPosition(data,$localStorage.user);
     		var moviePosition = getViewedMoviePosition(data,userPosition,movie);
+    		console.log(moviePosition)
     		console.log(movie);
     		console.log(userPosition);
     		console.log(moviePosition);
+    		//Si no está lo meto
     		if (moviePosition === -1){
     			var method = 'POST';
 				var url = 'db/prueba.php';
@@ -52,11 +73,44 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 					'duration': duration,
 					'genders': genders
 				};
+				var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+
+				//dataBase.send($http,method,url,FormData,headers);
+				
 	    		$http({
 					method: method,
 					url: url,
 					data: FormData,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+				}).
+				success(function(response) {
+					//$scope.codeStatus = response.data;
+					console.log(response)
+				}).
+				error(function(response) {
+					console.log("mal")
+					//$scope.codeStatus = response || "Request failed";
+				});
+
+	    	}else{// si está se elimina
+	    		console.log("Winnn")
+	    		var method = 'POST';
+				var url = 'db/prueba.php';
+				var FormData = {
+					'file': 'users.json',
+					'action': 'deleteFavoriteMovie',
+					'userPosition': userPosition,
+					'moviePosition': moviePosition,
+				};
+				var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+
+				//dataBase.send($http,method,url,FormData,headers);
+				
+	    		$http({
+					method: method,
+					url: url,
+					data: FormData,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
 				}).
 				success(function(response) {
 					$scope.codeStatus = response.data;
@@ -79,10 +133,10 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
     			}).indexOf(username)
     }
     //Get movie position
-    function getViewedMoviePosition (data,userPosition,movieMarkedAsViewed){
+    function getViewedMoviePosition (data,userPosition,movie){
     	return data[userPosition].viewed.map(function(movieViewed){
-				return movieViewed;
-			}).indexOf(movieMarkedAsViewed);
+				return movieViewed.title;
+			}).indexOf(movie);
     }
     
 
