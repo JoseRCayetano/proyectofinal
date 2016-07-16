@@ -1,5 +1,5 @@
 
-var app = angular.module('cine',['ui.bootstrap','ngRoute']);//en el array inyectamos dependencias
+var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies']);//en el array inyectamos dependencias
 
 app.config(['$routeProvider',function($routeProvider) {
 	$routeProvider
@@ -21,15 +21,76 @@ app.config(['$routeProvider',function($routeProvider) {
 	})
 }]);
 
-app.controller("mainController",["$scope","$http",function($scope,$http){
+app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
+	$scope.dataLoaded = false;
 	$http.get("db/cartelera.json").success (function (data){
         $scope.cartelera= data;
+        $scope.dataLoaded = true;
 
     });
+
+    //Function viewed film
+    $scope.checkViewedFilm = function (title,duration,genders){
+    	checkInUserDb(title,duration,genders);
+    }
+    function checkInUserDb(movie,duration,genders){
+    	$http.get("db/users.json").success(function (data){
+
+    		var userPosition = getUserPosition(data,$localStorage.user);
+    		var moviePosition = getViewedMoviePosition(data,userPosition,movie);
+    		console.log(movie);
+    		console.log(userPosition);
+    		console.log(moviePosition);
+    		if (moviePosition === -1){
+    			var method = 'POST';
+				var url = 'db/prueba.php';
+				var FormData = {
+					'file': 'users.json',
+					'action': 'newFavoriteMovie',
+					'userPosition': userPosition,
+					'newViewedMovie': movie,
+					'duration': duration,
+					'genders': genders
+				};
+	    		$http({
+					method: method,
+					url: url,
+					data: FormData,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					$scope.codeStatus = response.data;
+					console.log(response)
+				}).
+				error(function(response) {
+					console.log("mal")
+					$scope.codeStatus = response || "Request failed";
+				});
+
+	    	}
+    		
+	});
+}
+
+    //Get user poition
+    function getUserPosition(data,username){
+    	return data.map (function (users){
+    				return users.user;
+    			}).indexOf(username)
+    }
+    //Get movie position
+    function getViewedMoviePosition (data,userPosition,movieMarkedAsViewed){
+    	return data[userPosition].viewed.map(function(movieViewed){
+				return movieViewed;
+			}).indexOf(movieMarkedAsViewed);
+    }
+    
+
 }])
 
 //Active menu
-app.controller("menuController",["$scope","$location",function($scope,$location){
+app.controller("menuController",["$scope","$location",'$localStorage',function($scope,$location,$localStorage){
+	$scope.userlogged= $localStorage.user; //To show who is logged
 	$scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
     };
@@ -45,13 +106,16 @@ app.controller("formRegisterController" ,['$scope','$http','$location',function 
 		
 		var FormData = {
 			'file': 'users.json',
-			'action': 'new',
+			'action': 'newUser',
 			'user': $scope.user, 
 			'password': $scope.password,
 			'firstname': $scope.firstname,
 			'lastname': $scope.lastname,
 			'email': $scope.email
 		};
+
+		//application/json
+		//
 		$http({
 			method: method,
 			url: url,
@@ -91,7 +155,8 @@ app.controller("formRegisterController" ,['$scope','$http','$location',function 
 		*/
 }]);
 
-app.controller("formLoginController",['$scope','$http','$location',function ($scope,$http,$location){
+//Login controller
+app.controller("formLoginController",['$scope','$http','$location','$localStorage',function ($scope,$http,$location,$localStorage){
 	//Check if credential are in db
 	
 	$scope.checkUser = function(){
@@ -108,6 +173,7 @@ app.controller("formLoginController",['$scope','$http','$location',function ($sc
 			return element.user;
 		}).indexOf(user);
 		if (index != -1){
+			$localStorage.user = user;
 			$location.path("/main");
 		}
 	
@@ -186,5 +252,12 @@ app.directive('usermenu',function(){
 	return{
 		restrict: 'E', // PAra custom de html
 		templateUrl: 'views/user_menu.html'
+	}
+})
+//CUstome directive to load navigator user menu
+app.directive('navigatorusermenu',function(){
+	return{
+		restrict: 'E', // PAra custom de html
+		templateUrl: 'views/navigator-user-menu.html'
 	}
 })

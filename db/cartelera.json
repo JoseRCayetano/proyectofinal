@@ -2,7 +2,7 @@
   "title": "Antes de ti",
   "synopsis": "Una chica (Emilia Clarke) de una pequeña población entabla una estrecha relación con un joven (Sam Claflin) que está cuidando, tras haberse quedado recientemente paralítico.",
   "img_url":"img/cartelera/antes_de_mi.jpg" ,
-  "duration": "110 min",
+  "duration": "110",
   "genders" : ["Drama","Romance"],
   "cines": [
               {
@@ -122,7 +122,7 @@
   "title": "Buscando a Dory",
   "synopsis": "Un año después de los acontecimientos narrados en Buscando a Nemo, Dory vive apaciblemente con Marlin y su hijo Nemo. Pero durante un viaje para ver cómo las mantarrayas migran de vuelta a casa, los problemas de memoria de Dory parecen desaparecer durante un segundo: recuerda que tiene una familia e inmediatamente decide emprender viaje para reencontrarse con sus padres, a los que perdió hace años.",
   "img_url":"img/cartelera/buscando_a_dory.jpg" ,
-  "duration": "96 min",
+  "duration": "96",
   "genders" : ["Acentura","Animación","Comedia"],
   "cines": [
               {
@@ -243,7 +243,7 @@
   "title": "Expediente Warren: El Caso Enfield",
   "synopsis": "Secuela de la exitosa Expediente Warren (2013), que lleva de nuevo a la pantalla otro caso real de los expedientes de los renombrados demonólogos Ed y Lorraine Warren. En este caso ambos viajarán al norte de Londres para ayudar a una madre soltera que tiene a su cargo cuatro hijos y que vive sola con ellos en una casa plagada de espíritus malignos.",
   "img_url":"img/cartelera/expediente_warren.jpg" ,
-  "duration": "134 min",
+  "duration": "134",
   "genders" : ["Terror"],
   "cines": [
               {
@@ -366,7 +366,7 @@
   "title": "Independence Day: Contraataque",
   "synopsis": "Siempre supimos que volverían. Después de que INDEPENDENCE DAY redefiniera el género, el siguiente capítulo épico asiste a una catástrofe global de unas dimensiones inimaginables. Usando tecnología alienígena recuperada, las naciones de la Tierra han colaborado en un programa de defensa colosal para la protección del planeta. Pero nada puede prepararles para la fuerza avanzada y sin precedentes de los alienígenas. Únicamente la ingenuidad y valentía de unos pocos hombres y mujeres podrá salvar a la humanidad de la extinción.",
   "img_url":"img/cartelera/independence_day.jpg" ,
-  "duration": "120 min",
+  "duration": "120",
   "genders" : ["Accion","Aventura","Ciencia Ficción"],
   "cines": [
               {
@@ -487,7 +487,7 @@
   "title": "Mi amigo el gigante",
   "synopsis": "Sofía es una niña huérfana que vive en un orfanato, una noche en la que no puede dormir decide asomarse a la ventana. Por la calle ve algo que le deja sorprendida, un hombre muy alto que se asoma a las ventanas de las casas con una trompeta a la que sopla para que un polvo caiga sobre las camas. Cuando el gigante ve que está siendo espiado coge a Sofía de la mano y se la lleva consigo al País de los Gigantes.",
   "img_url":"img/cartelera/mi_amigo_el_gigante.jpg" ,
-  "duration": "117 min",
+  "duration": "117 ",
   "genders" : ["Familia","Fantasía"],
   "cines": [
               {
@@ -608,7 +608,7 @@
   "title": "Money Monster",
   "synopsis": "Lee Gates (George Clooney) es toda una personalidad televisiva, un famoso y grandilocuente presentador de televisión de un programa sobre finanzas. Gracias a la información privilegiada que posee, se convierte en un gurú de Wall Street. Pero las cosas se complican cuando Gates recomienda a sus espectadores invertir en acciones tecnológicas de alto riesgo, que misteriosamente se derrumban en la bolsa. Es entonces cuando el joven Kyle Budwell (Jack O'Connell), una de las personas que ha perdido todo el dinero de su familia por esta mala inversión, decide vengarse. Durante la emisión en directo del programa, el furioso inversor estafado secuestra al periodista, a su productora Patty Fenn (Julia Roberts) y a todo su equipo en directo. En tiempo real, Gates y Fenn deberán encontrar la manera de mantenerse con vida, mientras tratan de descubrir la verdad que hay detrás de todo el embrollo que rodea ese dinero.",
   "img_url":"img/cartelera/money_monster.jpg" ,
-  "duration": "99 min",
+  "duration": "99",
   "genders" : ["Drama","Suspense"],
   "cines": [
               {
@@ -729,7 +729,7 @@
   "title": "Ninja Turtles: Fuera de las sombras",
   "synopsis": "Cuando el malvado Shredder escapa de la muerte, regresa con un perverso plan: acabar con los cuatro superhéroes: Rapahel, Leonardo, Michelangelo y Donatello. Para ello, secuestra al profesor Jordan Perry y así conseguir la pócima que hizo posible la mutación de las tortugas. Una vez en su poder, recluta a dos criaturas, Rahzar y Tokka, para que destruyan a Las Tortugas Ninja.",
   "img_url":"img/cartelera/ninja_turtles.jpg" ,
-  "duration": "112 min",
+  "duration": "112",
   "genders" : ["Accion","Aventura","Comedia"],
   "cines": [
               {
@@ -850,7 +850,7 @@
   "title": "Un espía y medio",
   "synopsis": "Un letal agente del la CIA (Johnson), víctima de acoso escolar en su adolescencia, vuelve a casa para asistir a una reunión de antiguos alumnos. Con la excusa de estar trabajando en un caso secreto, consigue la ayuda del chico popular en los años de Instituto (Hart), que ahora es un aburrido contable y vive añorando sus años de gloria. Para cuando el pobre oficinista se da cuenta del embrollo en el que se está metiendo, es demasiado tarde para desentenderse y su nuevo amigo, con maniobras cada vez más impredecibles, le arrastra a un mundo de tiroteos, traiciones y espionaje que les obligará a jugarse el cuello en incontables ocasiones. ",
   "img_url":"img/cartelera/un_espia_y_medio.jpg" ,
-  "duration": "114 min",
+  "duration": "114",
   "genders" : ["Accion","Comedia"],
   "cines": [
               {
@@ -971,7 +971,7 @@
   "title": "Warcraft: El Origen",
   "synopsis": "Adaptación cinematográfica del exitoso videojuego, que ha generado todo un fenómeno sociológico a nivel mundial con su modo online. La historia gira en torno a un mundo de fantasía en el que se libran todo tipo de batallas y habitan muchas especies distintas (como humanos, orcos, enanos...). Bajo una máscara de jugabilidad basada en el rol, el juego llega a la gran pantalla para contar una historia de épicas proporciones en este irreal y fantástico mundo. Una batalla se está forjando entre las entrañas de los bosques, y alcanzará a todo habitante, enfrentándolos en una guerra sin precedentes en esta película que no deja indiferente a los fieles seguidores y a los novatos. Hechizos, magia y muchas armas son los complementos para una de las versiones cinematográficas de videojuego más esperadas de todos los tiempos.",
   "img_url":"img/cartelera/warcraft.jpg" ,
-  "duration": "123 min",
+  "duration": "123",
   "genders" : ["Accion","Aventura","Fantasía"],
   "cines": [
               

@@ -10,3 +10,12 @@ article {
 #cartelera article{
 	margin-top: 20px;
 }
+.card .card-body{
+	padding: 10px !important;
+}
+.glyphicon {
+	font-size: 18px;
+}
+.card{
+	cursor: pointer;
+}
