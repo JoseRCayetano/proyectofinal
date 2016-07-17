@@ -16,6 +16,8 @@ app.config(['$routeProvider',function($routeProvider) {
 		templateUrl: "db/dbController.php"
 	}).when("/movie/:title",{
 		templateUrl: "views/movie.html"
+	}).when("/cine/:title/:cine",{
+		templateUrl: "views/cine.html"
 	})
 	.otherwise({
 		redirectTo: "/",
@@ -42,7 +44,22 @@ app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
 	}
 
 }])*/
+//Cine view controller
+app.controller("cinemaController",["$scope","$http","$routeParams",function ($scope,$http,$routeParams){
+	
+	$scope.title = $routeParams.title;
+	$scope.cine = $routeParams.cine;
+	$scope.dataLoaded = false;
+	
+	$http.get("db/cartelera.json").success (function (data){
+        $scope.cartelera= data;
+        $scope.dataLoaded = true;
 
+    });
+
+}]);
+
+//Controller main page user
 app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
 	$scope.dataLoaded = false;
 	$http.get("db/cartelera.json").success (function (data){
@@ -254,7 +271,30 @@ app.controller("formLoginController",['$scope','$http','$location','$localStorag
 	}
 
 }]);
-//COntroller carousel
+
+//Rating controller
+
+app.controller('ratingController', function ($scope) {
+  $scope.rate = 7;
+  $scope.max = 10;
+  $scope.isReadonly = false;
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+  };
+
+  $scope.ratingStates = [
+    {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+    {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+    {stateOn: 'glyphicon-heart'},
+    {stateOff: 'glyphicon-off'}
+  ];
+});
+
+
+//Controller carousel
 app.controller("carouselController", function ($scope) {
 	$scope.myInterval = 3000;
 	$scope.noWrapSlides = false;

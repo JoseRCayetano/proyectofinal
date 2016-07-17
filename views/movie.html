@@ -6,6 +6,11 @@
 		<div class="row">
 			<div class="col-md-4">
 				<img class="img-responsive  " ng-src="{{pelicula.img_url}}" />
+				<div ng-controller="ratingController">
+				    <h4>Rating</h4>
+				    <uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+				    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+				</div>
 			</div>
 			<div class="col-md-8">
 				<!--Datos & boton evento & boton mapa boton seleccion cine -->
@@ -14,15 +19,50 @@
 					<li ng-repeat="gender in pelicula.genders">{{gender}}</li>
 				</ul>
 				<p>{{pelicula.synopsis}}</p>
-				<p>{{pelicula.duration}} min</p>
-				<ul class="list-unstyled">
-					<li ng-repeat="cine in pelicula.cines">{{cine.name}}</li>
+				<p>Duración {{pelicula.duration}} min</p>
+				<ul class="list-unstyled list-inline">
+					<li>
+			            <div class="btn-group">
+			              <a href="javascript:void(0)" class="btn btn-primary">Ver disponibilidad en cines</a>
+			              <a href="bootstrap-elements.html" data-target="#" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li  ng-repeat="cine in pelicula.cines"><a href="#/cine/{{pelicula.title}}/{{cine.name}}">{{cine.name}}</a></li>
+			              </ul>
+			            </div>
+					</li>
+					<li><button type="button" class="btn btn-primary">Crear evento para esta película</button></li>
 				</ul>
+				
 				
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">Comentarios peli</div>
+			<div class="col-md-12">
+				<h2>Comentarios sobre la película</h2>
+				<h4>Escribe un comentario</h4>
+				<textarea name="comments"></textarea>
+				<button type="button" class="btn btn-primary text-center">Enviar comentario</button>
+				<ul class="list-unstyled list-inline">
+					<li>
+						<h4>User1</h4>
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos consequatur labore odio, praesentium illo libero voluptate explicabo est voluptatibus rem, sapiente tempore nobis aliquam consectetur deserunt sint commodi corrupti. Voluptatem!
+						</p>
+					<li>
+					<li>
+						<h4>User1</h4>
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos consequatur labore odio, praesentium illo libero voluptate explicabo est voluptatibus rem, sapiente tempore nobis aliquam consectetur deserunt sint commodi corrupti. Voluptatem!
+						</p>
+					<li>
+					<li>
+						<h4>User1</h4>
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos consequatur labore odio, praesentium illo libero voluptate explicabo est voluptatibus rem, sapiente tempore nobis aliquam consectetur deserunt sint commodi corrupti. Voluptatem!
+						</p>
+					<li>
+				</ul>
+			</div>
 		</div>
 	</article>	
 </div>

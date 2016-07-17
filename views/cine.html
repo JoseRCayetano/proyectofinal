@@ -1,0 +1,38 @@
+<usermenu></usermenu>
+<navigatorusermenu></navigatorusermenu>
+
+<div class="container" ng-controller="cinemaController">
+	<article ng-repeat="pelicula in cartelera | filter:{title: title}">
+		<h1>{{pelicula.title}}</h1>
+		
+		<div ng-repeat="cine in pelicula.cines | filter:{name: cine}">
+			<div class="row">
+				<div class="col-md-6">Mapa</div>
+				<div class="col-md-6">
+					<h2>{{cine.name}}</h2>
+					<p><span class="glyphicon glyphicon-pushpin"></span> {{cine.direction}}</p>
+					<p><span class="glyphicon glyphicon-earphone"></span> {{cine.tlf}}</p>
+				</div>
+			</div>
+			<div class="row">
+				<h1>Horario de {{pelicula.title}} en {{cine.name}}</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th ng-repeat="sesion in cine.sesions">{{sesion.name}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td ng-repeat="sesion in cine.sesions">
+								<ul class="list-unstyled">
+									<li ng-repeat="hora in sesion.hora">{{hora}}</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>		
+				</table>
+			</div>
+		</div>
+	</article>
+</div>
