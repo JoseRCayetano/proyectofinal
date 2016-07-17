@@ -3,11 +3,16 @@
 
 <div class="container" ng-controller="cinemaController">
 	<article ng-repeat="pelicula in cartelera | filter:{title: title}">
-		<h1>{{pelicula.title}}</h1>
-		
 		<div ng-repeat="cine in pelicula.cines | filter:{name: cine}">
 			<div class="row">
-				<div class="col-md-6">Mapa</div>
+				<div class="col-md-6">
+					<h2>Localización</h2>
+					<ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="map.options" control="map.control">
+						<ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id" ></ui-gmap-marker> 
+						<!--<ui-gmap-markers models="map.markers" coords="'self'" options="'options'" isLabel="true"></ui-gmap-markers>-->
+
+					</ui-gmap-google-map>
+				</div>
 				<div class="col-md-6">
 					<h2>{{cine.name}}</h2>
 					<p><span class="glyphicon glyphicon-pushpin"></span> {{cine.direction}}</p>
@@ -15,7 +20,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<h1>Horario de {{pelicula.title}} en {{cine.name}}</h1>
+				<h1>Horario de <strong>{{pelicula.title}}</strong> en {{cine.name}}</h1>
 				<table class="table">
 					<thead>
 						<tr>

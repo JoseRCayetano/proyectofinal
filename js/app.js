@@ -1,7 +1,7 @@
 
-var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies']);//en el array inyectamos dependencias
+var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies','uiGmapgoogle-maps']);//en el array inyectamos dependencias
 
-app.config(['$routeProvider',function($routeProvider) {
+app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvider,GoogleMapApiProviders) {
 	$routeProvider
 	.when("/",{
 		templateUrl: "views/landing_page.html",
@@ -23,6 +23,10 @@ app.config(['$routeProvider',function($routeProvider) {
 		redirectTo: "/",
 		
 	})
+
+	GoogleMapApiProviders.configure({
+		china: true
+	});
 
 }]);
 //Factory to do pettition to the DB
@@ -56,6 +60,28 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
         $scope.dataLoaded = true;
 
     });
+
+    //Google map
+    $scope.map = { 
+    	center: { 
+    		latitude: 37.576399699999996, 
+    		longitude: -6.1021386 
+    	}, zoom: 12,
+    	options : {
+    		scrollwheel: true
+    	},
+    	control: {}
+    };
+    $scope.marker = {
+			id: 0,
+			coords: {
+				latitude: 37.5555,
+				longitude: -6.1021386
+			},
+			options: {
+				draggable: false
+			}
+		};
 
 }]);
 

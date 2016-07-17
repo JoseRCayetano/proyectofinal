@@ -37,4 +37,7 @@ textarea{
 	height: 150px;
 	resize: none;
 }
-
+.angular-google-map {
+             
+            height: 300px;
+        }
