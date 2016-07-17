@@ -54,19 +54,37 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
 	$scope.title = $routeParams.title;
 	$scope.cine = $routeParams.cine;
 	$scope.dataLoaded = false;
+
+
 	
 	$http.get("db/cartelera.json").success (function (data){
         $scope.cartelera= data;
         $scope.dataLoaded = true;
+        /*
+        var moviePos = getMoviePosition(data,$routeParams.title)
+        var cinePos = getCinePosition(data,moviePos,$routeParams.cine)
 
+        var cine = data[moviePos].cines[cinePos];
+        console.log (cine);
+        $scope.map = { 
+        	center: { 
+        		latitude: cine.long, 
+        		longitude: cine.lat 
+        	}, zoom: 12,
+        	options : {
+        		scrollwheel: true
+        	},
+        	control: {}
+        };*/
     });
+
 
     //Google map
     $scope.map = { 
     	center: { 
     		latitude: 37.576399699999996, 
     		longitude: -6.1021386 
-    	}, zoom: 12,
+    	}, zoom: 13,
     	options : {
     		scrollwheel: true
     	},
@@ -82,6 +100,20 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
 				draggable: false
 			}
 		};
+ //Get movie position
+    function getMoviePosition (data,movie){
+    	return data.map(function(movie){
+				return movie.title;
+			}).indexOf(movie);
+    }
+     function getCinePosition (data,moviePos,cine){
+    	return data[moviePos].cines.map(function(cine){
+    			console.log(cine.name)
+				return cine.name;
+
+			}).indexOf(cine);
+    }
+
 
 }]);
 
