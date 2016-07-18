@@ -453,7 +453,12 @@
         "genders": [
             "Terror"
         ],
-        "comments": [],
+        "comments": [
+            {
+                "user": "user1",
+                "comment": "no me gusta"
+            }
+        ],
         "rating": [
             {
                 "user": "user1",

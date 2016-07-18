@@ -32,7 +32,7 @@
 				<div class="card">
 					
 					<div class="card-image">
-						<img ng-src="{{pelicula.img_url}}" class="img-responsive"/>
+						<a href="#/movie/{{pelicula.title}}"><img ng-src="{{pelicula.img_url}}" class="img-responsive"/></a>
 					</div>
 					<div class="card-body">
 						
@@ -40,7 +40,7 @@
 							<li ng-click="checkFilm('view',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-eye-open"></span></li>
 							<li><span class="glyphicon glyphicon-bookmark"></span></li>
 							<li><span class="glyphicon glyphicon-heart-empty"></span></li>
-							<li class="text-right"><a href="#/movie/{{pelicula.title}}"><span class="glyphicon glyphicon-plus"></span></a></li>
+							
 						</ul>
 
 					</div>

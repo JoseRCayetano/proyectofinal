@@ -30,7 +30,7 @@
 			              </ul>
 			            </div>
 					</li>
-					<li><button type="button" class="btn btn-primary">Crear evento para esta película</button></li>
+					
 				</ul>
 				
 				
@@ -43,8 +43,8 @@
 				<textarea  ng-model="comment"></textarea>
 				<button type="button" class="btn btn-primary text-center" ng-click="sendComment(comment,pelicula.title)">Enviar comentario</button>
 				<ul class="list-unstyled ">
-					<li ng-repeat="comment in comments">
-						<h4>{{comment.user}}</h4>
+					<li ng-repeat="comment in comments " class="well">
+						<h4><strong>{{comment.user}}</strong></h4>
 						<p>
 						{{comment.comment}}
 						</p>
