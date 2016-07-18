@@ -8,7 +8,7 @@
 				<img class="img-responsive  " ng-src="{{pelicula.img_url}}" />
 				<div ng-controller="ratingController">
 				    <h4>Rating</h4>
-				    <uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+				    <uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating" ng-click="saveValue(rate)"></uib-rating>
 				    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
 				</div>
 			</div>
@@ -40,27 +40,16 @@
 			<div class="col-md-12">
 				<h2>Comentarios sobre la película</h2>
 				<h4>Escribe un comentario</h4>
-				<textarea name="comments"></textarea>
-				<button type="button" class="btn btn-primary text-center">Enviar comentario</button>
-				<ul class="list-unstyled list-inline">
-					<li>
-						<h4>User1</h4>
+				<textarea  ng-model="comment"></textarea>
+				<button type="button" class="btn btn-primary text-center" ng-click="sendComment(comment,pelicula.title)">Enviar comentario</button>
+				<ul class="list-unstyled ">
+					<li ng-repeat="comment in comments">
+						<h4>{{comment.user}}</h4>
 						<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos consequatur labore odio, praesentium illo libero voluptate explicabo est voluptatibus rem, sapiente tempore nobis aliquam consectetur deserunt sint commodi corrupti. Voluptatem!
+						{{comment.comment}}
 						</p>
 					<li>
-					<li>
-						<h4>User1</h4>
-						<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos consequatur labore odio, praesentium illo libero voluptate explicabo est voluptatibus rem, sapiente tempore nobis aliquam consectetur deserunt sint commodi corrupti. Voluptatem!
-						</p>
-					<li>
-					<li>
-						<h4>User1</h4>
-						<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos consequatur labore odio, praesentium illo libero voluptate explicabo est voluptatibus rem, sapiente tempore nobis aliquam consectetur deserunt sint commodi corrupti. Voluptatem!
-						</p>
-					<li>
+					
 				</ul>
 			</div>
 		</div>

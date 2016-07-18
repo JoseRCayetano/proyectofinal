@@ -29,6 +29,13 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 	});
 
 }]);
+app.factory('find',function (){
+	return {
+		user: function (data,username){
+			
+		}
+	}
+})
 //Factory to do pettition to the DB
 /*
 app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
@@ -228,13 +235,65 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
 //Movie file controller
 
-app.controller("movieController",["$scope","$http","$routeParams", function ($scope,$http,$routeParams){
+app.controller("movieController",["$scope","$http","$routeParams",'$localStorage', function ($scope,$http,$routeParams,$localStorage){
 	$scope.title = $routeParams.title;
+	$localStorage.movie = $routeParams.title;
+	$scope.comments="";
+
+
 	$http.get("db/cartelera.json").success (function (data){
         $scope.cartelera= data;
         $scope.dataLoaded = true;
 
+        var positionMovie = data.map (function (movie){
+				return movie.title;
+			}).indexOf($routeParams.title);
+        console.log(data[positionMovie].comments)
+
+		$scope.comments = data[positionMovie].comments;
+
     });
+	
+	
+   
+    $scope.sendComment = function (comment,movie){
+    	//Save in $scope.comments
+    	var user = $localStorage.user;
+    	$scope.comments.push({ user , comment})
+
+    	$http.get("db/cartelera.json").success(function (data){
+			var positionMovie = data.map (function (movie){
+				return movie.title;
+			}).indexOf(movie);
+			
+
+			var FormData = {
+				'file': 'cartelera.json',
+				'action': 'newComment',
+				'positionMovie': positionMovie,
+				'user':$localStorage.user, 
+				'comment': comment
+			};
+			var method = 'POST';
+			var url = 'db/prueba.php';
+			
+			$http({
+				method: method,
+				url: url,
+				data: FormData,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			}).
+			success(function(response) {
+				$scope.codeStatus = response.data;
+				console.log(response)
+			}).
+			error(function(response) {
+				console.log("mal")
+				$scope.codeStatus = response || "Request failed";
+			});
+		});
+    }
+
 }])
 
 //Active menu
@@ -332,24 +391,172 @@ app.controller("formLoginController",['$scope','$http','$location','$localStorag
 
 //Rating controller
 
-app.controller('ratingController', function ($scope) {
-  $scope.rate = 7;
-  $scope.max = 10;
-  $scope.isReadonly = false;
+app.controller('ratingController',["$scope","$http","$localStorage",function ($scope,$http,$localStorage) {
+	$scope.rate = 0;
+	$scope.max = 10;
+	$scope.isReadonly = false;
 
-  $scope.hoveringOver = function(value) {
-    $scope.overStar = value;
-    $scope.percent = 100 * (value / $scope.max);
-  };
+	$scope.hoveringOver = function(value) {
+		$scope.overStar = value;
+		$scope.percent = 100 * (value / $scope.max);
+	};
 
-  $scope.ratingStates = [
-    {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-    {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-    {stateOn: 'glyphicon-heart'},
-    {stateOff: 'glyphicon-off'}
-  ];
-});
+	$scope.saveValue = function (rate){
+		//save rating , busco usuario, si esta sobreescribo, si no que meta uno nuevo
+	  console.log(rate);
+	  var url="db/cartelera.json";
+		$http.get(url).success(function (data){
+			//Find if user has comment before
+			var positionMovie = data.map(function (movie){
+				return movie.title;
+			}).indexOf($localStorage.movie);
+
+			console.log("posMov " + positionMovie)
+			
+			var positionUser = data[positionMovie].rating.map(function (rating){
+				return rating.user;
+			}).indexOf($localStorage.user);
+
+			console.log("posUser " + positionUser)
+			//If user  not comment before
+			if(positionUser === -1){
+				alert("es menos 1")
+				var FormData = {
+					'file': 'cartelera.json',
+					'action': 'newRating',
+					'positionMovie': positionMovie,
+					'user': $localStorage.user, 
+					'rating': rate
+					
+				};
+				console.log(FormData)
+				$http({
+					method:'POST',
+					url: 'db/prueba.php',
+					data: FormData,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					console.log("succ")
+					$scope.codeStatus = response.data;
+					console.log(response)
+				}).
+				error(function(response) {
+					console.log("mal")
+					$scope.codeStatus = response || "Request failed";
+				});
+			}else{ //Update rating
+				var FormData = {
+					'file': 'cartelera.json',
+					'action': 'updateRating',
+					'userPosition':positionUser,
+					'moviePosition': positionMovie,
+					'user': $localStorage.user, 
+					'rating': rate
+					
+				};
+				$http({
+					method: 'POST',
+					url: 'db/prueba.php',
+					data: FormData,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					$scope.codeStatus = response.data;
+					console.log(response)
+				}).
+				error(function(response) {
+					console.log("mal")
+					$scope.codeStatus = response || "Request failed";
+				});
+			}
+		});
+
+	}
+
+	/*
+	$scope.$watch('rate', function(value) {
+	  //save rating , busco usuario, si esta sobreescribo, si no que meta uno nuevo
+	  console.log(value);
+	  var url="db/cartelera.json";
+		$http.get(url).success(function (data){
+			//Find if user has comment before
+			var positionMovie = data.map (function (movie){
+				return movie.title;
+			}).indexOf($localStorage.movie);
+
+			console.log("posMov " + positionMovie)
+			
+			var positionUser = data[positionMovie].rating.map(function (rating){
+				return rating.user;
+			}).indexOf($localStorage.user);
+
+			console.log("posUser " + positionUser)
+			//If user  not comment before
+			if(positionUser === -1){
+				alert("es menos 1")
+				var FormData = {
+					'file': 'cartelera.json',
+					'action': 'newRating',
+					'positionMovie': positionMovie,
+					'user': $localStorage.user, 
+					'rating': value
+					
+				};
+				$http({
+					method: 'POST',
+					url: url,
+					data: FormData,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					console.log("succ")
+					$scope.codeStatus = response.data;
+					console.log(response)
+				}).
+				error(function(response) {
+					console.log("mal")
+					$scope.codeStatus = response || "Request failed";
+				});
+			}else{ //Update rating
+				var FormData = {
+					'file': 'cartelera.json',
+					'action': 'updateRating',
+					'userPosition':positionUser,
+					'moviePosition': positionMovie,
+					'user': $localStorage.user, 
+					'rating': value
+					
+				};
+				$http({
+					method: 'POST',
+					url: url,
+					data: FormData,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					$scope.codeStatus = response.data;
+					console.log(response)
+				}).
+				error(function(response) {
+					console.log("mal")
+					$scope.codeStatus = response || "Request failed";
+				});
+			}
+		});
+	  
+	  
+
+	});*/
+
+	$scope.ratingStates = [
+	{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+	{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+	{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+	{stateOn: 'glyphicon-heart'},
+	{stateOff: 'glyphicon-off'}
+	];
+}]);
 
 
 //Controller carousel

@@ -21,6 +21,19 @@ switch ($data->file){
 			break;
 		}
 	break;
+	case 'cartelera.json':
+		switch($data->action){
+			case 'newComment':
+				newComment($data);
+			break;
+			case 'newRating':
+				newRating($data);
+			break; 
+			case 'updateRating':
+				updateRating($data);
+			break;	
+		}
+	break;
 }
 
 function newUser($data){
@@ -79,6 +92,47 @@ function deleteFavoriteMovie ($data){
 	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
 	
+}
+function newComment ($data){
+	$file = $data->file;
+
+	$comment['user'] = $data->user;
+	$comment['comment'] = $data->comment;
+
+	$positionMovie = (int) $data->positionMovie;
+
+	echo $positionMovie;
+
+
+	$tempArray = json_decode(file_get_contents($file));
+	array_push($tempArray[$positionMovie]->comments, $comment);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+}
+
+function newRating ($data){
+	$file = $data->file;
+
+	$rating['user'] = $data->user;
+	$rating['rating'] = $data->rating;
+	$positionMovie = (int) $data->positionMovie;
+
+	$tempArray = json_decode(file_get_contents($file));
+	array_push($tempArray[$positionMovie]->rating, $rating);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+}
+function updateRating ($data){
+	$file = $data->file;
+	$userPosition = (int)$data->userPosition;
+	$user = $data->user;
+	$rating = $data->rating;
+	$positionMovie = (int) $data->positionMovie;
+
+	$tempArray = json_decode(file_get_contents($file));
+	array_push($tempArray[$positionMovie]->rating[$userPosition], $rating);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
 }
 
 ?>
