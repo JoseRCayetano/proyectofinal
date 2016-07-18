@@ -124,13 +124,15 @@ function newRating ($data){
 }
 function updateRating ($data){
 	$file = $data->file;
-	$userPosition = (int)$data->userPosition;
-	$user = $data->user;
-	$rating = $data->rating;
+	$positionUser = (int)$data->positionUser;
+
+	$rating['user'] = $data->user;
+	$rating['rating'] = $data->rating;
 	$positionMovie = (int) $data->positionMovie;
 
 	$tempArray = json_decode(file_get_contents($file));
-	array_push($tempArray[$positionMovie]->rating[$userPosition], $rating);
+	array_splice($tempArray[$positionMovie]->rating,$positionUser,1);
+	array_push($tempArray[$positionMovie]->rating, $rating);
 	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
 }

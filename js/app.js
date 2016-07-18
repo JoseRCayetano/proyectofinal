@@ -400,6 +400,26 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 		$scope.overStar = value;
 		$scope.percent = 100 * (value / $scope.max);
 	};
+	$http.get("db/cartelera.json").success(function (data){
+			//Find if user has comment before
+			var positionMovie = data.map(function (movie){
+				return movie.title;
+			}).indexOf($localStorage.movie);
+
+			console.log("posMov " + positionMovie)
+			
+			var positionUser = data[positionMovie].rating.map(function (rating){
+				return rating.user;
+			}).indexOf($localStorage.user);
+
+			console.log("posUser " + positionUser)
+			//If user  not comment before
+			if(positionUser === -1){
+				$scope.rate = 0;
+			}else{
+				$scope.rate = data[positionMovie].rating[positionUser].rating;
+			}
+	})
 
 	$scope.saveValue = function (rate){
 		//save rating , busco usuario, si esta sobreescribo, si no que meta uno nuevo
@@ -449,8 +469,8 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 				var FormData = {
 					'file': 'cartelera.json',
 					'action': 'updateRating',
-					'userPosition':positionUser,
-					'moviePosition': positionMovie,
+					'positionUser':positionUser,
+					'positionMovie': positionMovie,
 					'user': $localStorage.user, 
 					'rating': rate
 					
@@ -477,75 +497,7 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 	/*
 	$scope.$watch('rate', function(value) {
 	  //save rating , busco usuario, si esta sobreescribo, si no que meta uno nuevo
-	  console.log(value);
-	  var url="db/cartelera.json";
-		$http.get(url).success(function (data){
-			//Find if user has comment before
-			var positionMovie = data.map (function (movie){
-				return movie.title;
-			}).indexOf($localStorage.movie);
-
-			console.log("posMov " + positionMovie)
-			
-			var positionUser = data[positionMovie].rating.map(function (rating){
-				return rating.user;
-			}).indexOf($localStorage.user);
-
-			console.log("posUser " + positionUser)
-			//If user  not comment before
-			if(positionUser === -1){
-				alert("es menos 1")
-				var FormData = {
-					'file': 'cartelera.json',
-					'action': 'newRating',
-					'positionMovie': positionMovie,
-					'user': $localStorage.user, 
-					'rating': value
-					
-				};
-				$http({
-					method: 'POST',
-					url: url,
-					data: FormData,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				}).
-				success(function(response) {
-					console.log("succ")
-					$scope.codeStatus = response.data;
-					console.log(response)
-				}).
-				error(function(response) {
-					console.log("mal")
-					$scope.codeStatus = response || "Request failed";
-				});
-			}else{ //Update rating
-				var FormData = {
-					'file': 'cartelera.json',
-					'action': 'updateRating',
-					'userPosition':positionUser,
-					'moviePosition': positionMovie,
-					'user': $localStorage.user, 
-					'rating': value
-					
-				};
-				$http({
-					method: 'POST',
-					url: url,
-					data: FormData,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				}).
-				success(function(response) {
-					$scope.codeStatus = response.data;
-					console.log(response)
-				}).
-				error(function(response) {
-					console.log("mal")
-					$scope.codeStatus = response || "Request failed";
-				});
-			}
-		});
-	  
-	  
+	 
 
 	});*/
 

@@ -17,9 +17,8 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 4
+                "rating": 5
             }
-            
         ],
         "cines": [
             {
@@ -244,9 +243,18 @@
             {
                 "user": "user1",
                 "comment": "comment9"
+            },
+            {
+                "user": "user1",
+                "comment": "comment10"
             }
         ],
-        "rating": [],
+        "rating": [
+            {
+                "user": "user1",
+                "rating": 6
+            }
+        ],
         "cines": [
             {
                 "name": "Cinesa Plaza de Armas 3D",
@@ -446,7 +454,12 @@
             "Terror"
         ],
         "comments": [],
-        "rating": [],
+        "rating": [
+            {
+                "user": "user1",
+                "rating": 10
+            }
+        ],
         "cines": [
             {
                 "name": "Cinesa Plaza de Armas 3D",
