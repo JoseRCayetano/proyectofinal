@@ -1,5 +1,5 @@
 
-var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies','uiGmapgoogle-maps']);//en el array inyectamos dependencias
+var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies','uiGmapgoogle-maps','ngAnimate']);//en el array inyectamos dependencias
 
 app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvider,GoogleMapApiProviders) {
 	$routeProvider
@@ -20,6 +20,8 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 		templateUrl: "views/cine.html"
 	}).when("/event/:title/:cine",{
 		templateUrl: "views/createEvent.html"
+	}).when("/events",{
+		templateUrl: "views/showEvents.html"
 	})
 	.otherwise({
 		redirectTo: "/",
@@ -58,24 +60,119 @@ app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
 
 }])*/
 
+//ShowEventsCOntroller
+app.controller("uibAccordion",["$scope","$http","$localStorage",function ($scope,$http,$routeParams,$localStorage){
+$scope.oneAtATime = true;
+	$http.get('db/events.json').success(function (response){
+		$scope.events = response;
+	});
+	 $scope.oneAtATime = true;
+
+  $scope.groups = [
+    {
+      title: 'Dynamic Group Header - 1',
+      content: 'Dynamic Group Body - 1'
+    },
+    {
+      title: 'Dynamic Group Header - 2',
+      content: 'Dynamic Group Body - 2'
+    }
+  ];
+
+  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+
+  $scope.addItem = function() {
+    var newItemNo = $scope.items.length + 1;
+    $scope.items.push('Item ' + newItemNo);
+  };
+
+  $scope.status = {
+    isCustomHeaderOpen: false,
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
+}])
 //user event controller
-app.controller("createEventController",["$scope","$http","$routeParams",function ($scope,$http,$routeParams){
-	$scope.title = $routeParams.title;
+app.controller("createEventController",["$scope","$http","$routeParams","$localStorage",function ($scope,$http,$routeParams,$localStorage){
+	$scope.movie = $routeParams.title;
 	$scope.cine = $routeParams.cine;
+	$scope.user = $localStorage.user;
 
 	$scope.createEvent = function (){
-		alert($scope.dt)
+		//Get last id
+		$http.get('db/events.json').success(function (response){
+			var index = 0; 
+			$scope.success = false;
+			console.log(response.length)
+			if (response.length !== 0){
+				var lastEvent = response.pop();
+			
+				index =lastEvent.id + 1;
+				
+			}else{
+				index = 0;
+			}
+			
+			var FormData = {
+				'file': 'events.json',
+				'action': 'createEvent',
+				'id': index,
+				'movie': $scope.movie,
+				'cine': $scope.cine,
+				'date': $scope.date,
+				'hour': $scope.time.getHours()+":"+$scope.time.getMinutes(),
+				'user': $scope.user
+			};
+			var method = 'POST';
+			var url = 'db/prueba.php';
+
+			$http({
+				method: method,
+				url: url,
+				data: FormData,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			}).
+			success(function(response) {
+				$scope.codeStatus = response.data;
+				console.log(response)
+				$scope.success = true;
+			}).
+			error(function(response) {
+				console.log("mal")
+				$scope.codeStatus = response || "Request failed";
+			});
+			
+		})
+		
 	}
+
+
+
+
+	/* Time Picker */
+	$scope.time = new Date();
+
+	$scope.hstep = 1;
+	$scope.mstep = 1;
+
+	$scope.options = {
+		hstep: [1, 2, 3],
+		mstep: [1, 5, 10, 15, 25, 30]
+	};
+	$scope.max=59;
+
+	$scope.ismeridian = false;
+
 	/* Date picker */
 	$scope.today = function() {
-		$scope.dt = new Date();
+		$scope.date = new Date();
 	};
 	$scope.today();
 
 	
 
 	$scope.clear = function() {
-		$scope.dt = null;
+		$scope.date = null;
 	};
 
 	$scope.inlineOptions = {
@@ -110,7 +207,7 @@ app.controller("createEventController",["$scope","$http","$routeParams",function
   };
 
   $scope.setDate = function(year, month, day) {
-  	$scope.dt = new Date(year, month, day);
+  	$scope.date = new Date(year, month, day);
 
   };
 

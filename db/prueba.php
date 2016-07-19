@@ -34,6 +34,13 @@ switch ($data->file){
 			break;	
 		}
 	break;
+	case 'events.json':
+		switch($data->action){
+			case 'createEvent':
+				createEvent($data);
+			break;
+		}
+	break;
 }
 
 function newUser($data){
@@ -135,6 +142,23 @@ function updateRating ($data){
 	array_push($tempArray[$positionMovie]->rating, $rating);
 	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
+}
+
+function createEvent($data){
+	$file = $data->file;
+	$newEvent['id'] = $data->id;
+	$newEvent['movie'] = $data->movie;
+	$newEvent['cine'] = $data->cine;
+	$newEvent['date'] = $data->date;
+	$newEvent['hour'] = $data->hour;
+	$newEvent['user'] = $data->user;
+
+	$tempArray = json_decode(file_get_contents($file));
+	array_push($tempArray, $newEvent);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+
+
 }
 
 ?>
