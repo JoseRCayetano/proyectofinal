@@ -1,10 +1,62 @@
 [
     {
-        "id": 0,
+        "id": 1,
         "movie": "Antes de ti",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-19T10:13:54.309Z",
-        "hour": "12:13",
-        "user": "user1"
+        "date": "2016-07-20T08:52:29.020Z",
+        "hour": "10:52",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 2,
+        "movie": "Antes de ti",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-26T10:02:47.026Z",
+        "hour": "12:2",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 3,
+        "movie": "Buscando a Dory",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-29T10:57:47.831Z",
+        "hour": "12:57",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 4,
+        "movie": "Antes de ti",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-28T11:00:07.178Z",
+        "hour": "13:0",
+        "assistants": [
+            "user2"
+        ]
+    },
+    {
+        "id": 5,
+        "movie": "Expediente Warren: El Caso Enfield",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-27T11:09:33.667Z",
+        "hour": "13:9",
+        "assistants": [
+            "user2"
+        ]
+    },
+    {
+        "id": 6,
+        "movie": "Ninja Turtles: Fuera de las sombras",
+        "cine": "Cinesur Nervión",
+        "date": "2016-07-25T11:12:00.869Z",
+        "hour": "13:12",
+        "assistants": [
+            "user2"
+        ]
     }
 ]

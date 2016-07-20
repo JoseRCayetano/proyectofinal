@@ -60,37 +60,91 @@ app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
 
 }])*/
 
-//ShowEventsCOntroller
-app.controller("uibAccordion",["$scope","$http","$localStorage",function ($scope,$http,$routeParams,$localStorage){
-$scope.oneAtATime = true;
-	$http.get('db/events.json').success(function (response){
-		$scope.events = response;
-	});
-	 $scope.oneAtATime = true;
+//ShowEventsController
+app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$routeParams,$localStorage){
 
-  $scope.groups = [
+
+
+
+//Show calendar
+ $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+ 
+  $http.get('db/events.json').success(function (response){
+		$scope.eventos = response;
+		$scope.events = [];
+		loadEvents(response);
+		 $scope.options = {
+		    customClass: getDayClass,
+		    minDate: new Date(),
+		    showWeeks: true
+ 		 };
+ 		
+
+	});
+$scope.events = false;
+/*
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  console.log("--> "+tomorrow);
+  var afterTomorrow = new Date(tomorrow);
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  $scope.events = [
     {
-      title: 'Dynamic Group Header - 1',
-      content: 'Dynamic Group Body - 1'
+      date: tomorrow,
+      status: 'full'
     },
     {
-      title: 'Dynamic Group Header - 2',
-      content: 'Dynamic Group Body - 2'
+      date: afterTomorrow,
+      status: 'partially'
     }
   ];
+*/
+function loadEvents(response){
+	
+	var dates = response.map (function (event){
+		return event.date;
+	});
+	dates.forEach(function (date){
+		$scope.events.push({date: (new Date(date)),status: 'full'});
+	})
+	
+}
+  function getDayClass(data) {
+    var date = data.date,
+      mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
-  $scope.addItem = function() {
-    var newItemNo = $scope.items.length + 1;
-    $scope.items.push('Item ' + newItemNo);
-  };
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  }
+
+//Show vents
+$scope.oneAtATime = true;
+
 
   $scope.status = {
     isCustomHeaderOpen: false,
     isFirstOpen: true,
     isFirstDisabled: false
   };
+  //To show date in pretty format
+  $scope.getDate = function  (string){
+ 	var date = new Date(string);
+ 	return date.getDay()+"-"+date.getMonth()+"-"+date.getFullYear();
+  }
 }])
 //user event controller
 app.controller("createEventController",["$scope","$http","$routeParams","$localStorage",function ($scope,$http,$routeParams,$localStorage){

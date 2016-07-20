@@ -151,7 +151,9 @@ function createEvent($data){
 	$newEvent['cine'] = $data->cine;
 	$newEvent['date'] = $data->date;
 	$newEvent['hour'] = $data->hour;
-	$newEvent['user'] = $data->user;
+	$newEvent['assistants'] = [];
+	array_push($newEvent['assistants'],$data->user);
+	
 
 	$tempArray = json_decode(file_get_contents($file));
 	array_push($tempArray, $newEvent);
