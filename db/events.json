@@ -1,20 +1,31 @@
 [
     {
+        "id": 0,
+        "movie": "Antes de ti",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-22T13:47:14.710Z",
+        "hour": "16:47",
+        "assistants": [
+            "user1",
+            "user2"
+        ]
+    },
+    {
         "id": 1,
         "movie": "Antes de ti",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-20T08:52:29.020Z",
-        "hour": "10:52",
+        "date": "2016-07-25T13:52:19.333Z",
+        "hour": "15:52",
         "assistants": [
             "user1"
         ]
     },
     {
         "id": 2,
-        "movie": "Antes de ti",
+        "movie": "Buscando a Dory",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-26T10:02:47.026Z",
-        "hour": "12:2",
+        "date": "2016-07-26T13:53:37.222Z",
+        "hour": "15:53",
         "assistants": [
             "user1"
         ]
@@ -23,38 +34,61 @@
         "id": 3,
         "movie": "Buscando a Dory",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-29T10:57:47.831Z",
-        "hour": "12:57",
+        "date": "2016-07-28T13:54:17.901Z",
+        "hour": "15:54",
         "assistants": [
             "user1"
         ]
     },
     {
         "id": 4,
-        "movie": "Antes de ti",
+        "movie": "Buscando a Dory",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-28T11:00:07.178Z",
-        "hour": "13:0",
+        "date": "2016-08-03T13:55:32.864Z",
+        "hour": "15:55",
         "assistants": [
-            "user2"
+            "user2",
+            "user1"
         ]
     },
     {
         "id": 5,
+        "movie": "Independence Day: Contraataque",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-27T13:59:09.609Z",
+        "hour": "15:59",
+        "assistants": [
+            "user2",
+            "user1"
+        ]
+    },
+    {
+        "id": 6,
         "movie": "Expediente Warren: El Caso Enfield",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-27T11:09:33.667Z",
-        "hour": "13:9",
+        "date": "2016-08-01T14:02:03.298Z",
+        "hour": "16:2",
+        "assistants": [
+            "user2",
+            "user1"
+        ]
+    },
+    {
+        "id": 7,
+        "movie": "Expediente Warren: El Caso Enfield",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-29T14:04:44.399Z",
+        "hour": "16:4",
         "assistants": [
             "user2"
         ]
     },
     {
-        "id": 6,
-        "movie": "Ninja Turtles: Fuera de las sombras",
-        "cine": "Cinesur Nervión",
-        "date": "2016-07-25T11:12:00.869Z",
-        "hour": "13:12",
+        "id": 8,
+        "movie": "Independence Day: Contraataque",
+        "cine": "Ábaco Cines Camas",
+        "date": "2016-08-02T14:16:10.151Z",
+        "hour": "16:16",
         "assistants": [
             "user2"
         ]

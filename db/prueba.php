@@ -39,6 +39,9 @@ switch ($data->file){
 			case 'createEvent':
 				createEvent($data);
 			break;
+			case 'goToEvent':
+				goToEvent($data);
+			break;
 		}
 	break;
 }
@@ -159,8 +162,30 @@ function createEvent($data){
 	array_push($tempArray, $newEvent);
 	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
-
-
 }
 
+function goToEvent($data){
+	$file = $data->file;
+
+	$id = (int) $data->idEvent;
+	$user = $data->user;
+
+	$tempArray = json_decode(file_get_contents($file));
+	array_push($tempArray[$id]->assistants, $user);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+}
+
+function leaveEvent($data){
+	$file = $data->file;
+
+	$id = (int) $data->idEvent;
+	$positionUser = (int) $data->positionUser;
+
+	$tempArray = json_decode(file_get_contents($file));
+	//array_splice($tempArray[$positionMovie]->rating,$positionUser,1);
+	array_push($tempArray[$id]->assistants, $user);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+}
 ?>

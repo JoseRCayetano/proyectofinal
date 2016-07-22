@@ -21,6 +21,8 @@
 						<ul class="list-unstyled list-inline">
 							<li ng-repeat="assistant in event.assistants">{{assistant }}</li>
 						</ul>
+						<button type="button" class="btn btn-primary" ng-click="goToEvent(event.id)">Ir al evento</button>
+						<button type="button" class="btn btn-primary" ng-click="leaveEvent(event.id)">Ir al evento</button>
 					</uib-accordion-group>
 			</uib-accordion>
 		</div>

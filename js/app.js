@@ -27,7 +27,8 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 		redirectTo: "/",
 		
 	})
-
+	
+	 
 	GoogleMapApiProviders.configure({
 		china: true
 	});
@@ -40,6 +41,7 @@ app.factory('find',function (){
 		}
 	}
 })
+
 //Factory to do pettition to the DB
 /*
 app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
@@ -61,8 +63,76 @@ app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
 }])*/
 
 //ShowEventsController
-app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$routeParams,$localStorage){
+app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
+console.log($localStorage.user)
 
+$scope.leaveEvent = function (idEvent){
+	var userIndex = $scope.eventos[idEvent].assistants.map (function (user){
+		return user;
+	}).indexOf($localStorage.user)
+
+	if (userIndex !== -1){
+		var FormData = {
+			'file': 'events.json',
+			'action': 'leaveEvent',
+			'idEvent': idEvent,
+			'positionUser': userIndex
+		}
+		var method = 'POST';
+			var url = 'db/prueba.php';
+
+			$http({
+				method: method,
+				url: url,
+				data: FormData,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			}).
+			success(function(response) {
+				$scope.codeStatus = response.data;
+				console.log(response)
+				$scope.success = true;
+				$scope.eventos[idEvent].assistants.splice(userIndex,1)
+			}).
+			error(function(response) {
+				console.log("mal")
+				$scope.codeStatus = response || "Request failed";
+			});
+	}
+}
+$scope.goToEvent = function (idEvent){
+	var userIndex = $scope.eventos[idEvent].assistants.map (function (user){
+		return user;
+	}).indexOf($localStorage.user)
+
+	if (userIndex === -1){
+		var FormData = {
+			'file': 'events.json',
+			'action': 'goToEvent',
+			'idEvent': idEvent,
+			'user': $localStorage.user
+		}
+		var method = 'POST';
+			var url = 'db/prueba.php';
+
+			$http({
+				method: method,
+				url: url,
+				data: FormData,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			}).
+			success(function(response) {
+				$scope.codeStatus = response.data;
+				console.log(response)
+				$scope.success = true;
+				$scope.eventos[idEvent].assistants.push($localStorage.user)
+			}).
+			error(function(response) {
+				console.log("mal")
+				$scope.codeStatus = response || "Request failed";
+			});
+	}
+
+}
 
 
 
@@ -82,9 +152,11 @@ app.controller("showEventsController",["$scope","$http","$localStorage",function
 		    minDate: new Date(),
 		    showWeeks: true
  		 };
- 		
+ 		// $route.reload();
+	 		
 
 	});
+  //$window.location.reload();
 $scope.events = false;
 /*
   var tomorrow = new Date();
