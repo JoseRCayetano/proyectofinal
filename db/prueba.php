@@ -42,6 +42,9 @@ switch ($data->file){
 			case 'goToEvent':
 				goToEvent($data);
 			break;
+			case 'leaveEvent':
+				leaveEvent($data);
+			break;
 		}
 	break;
 }
@@ -179,12 +182,11 @@ function goToEvent($data){
 function leaveEvent($data){
 	$file = $data->file;
 
-	$id = (int) $data->idEvent;
+	$idEvent = (int) $data->idEvent;
 	$positionUser = (int) $data->positionUser;
 
 	$tempArray = json_decode(file_get_contents($file));
-	//array_splice($tempArray[$positionMovie]->rating,$positionUser,1);
-	array_push($tempArray[$id]->assistants, $user);
+	array_splice($tempArray[$idEvent]->assistants,$positionUser,1);
 	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	file_put_contents($file, $jsonData);
 }

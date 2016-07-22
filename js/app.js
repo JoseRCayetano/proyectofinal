@@ -22,6 +22,8 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 		templateUrl: "views/createEvent.html"
 	}).when("/events",{
 		templateUrl: "views/showEvents.html"
+	}).when("/movie-rating",{
+		templateUrl: "views/movie-rating.html"
 	})
 	.otherwise({
 		redirectTo: "/",
@@ -34,38 +36,81 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 	});
 
 }]);
-app.factory('find',function (){
-	return {
-		user: function (data,username){
-			
-		}
-	}
-})
 
-//Factory to do pettition to the DB
-/*
-app.factory('dataBase', ['$http',function ($http,method,url,formData,headers){
-	var request = {};
+
+
+app.controller("movieRatingController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
 	
-	request.send = function (){
-		$http.post({method,url,formData,headers}).
-		success(function(response) {
-			$scope.codeStatus = response.data;
-			console.log(response)
-		}).
-		error(function(response) {
-			console.log("mal")
-			$scope.codeStatus = response || "Request failed";
-		});
+	/*
+	 $http.get('db/cartelera.json').then(function (response){
+	 		$scope.cartelera =  sumarPuntuacion(response.data);
+		 })*/
+	$scope.cartelera =  sumarPuntuacion($localStorage.cartelera);
 
+
+
+	function sumarPuntuacion (response){
+		
+		var array = [];
+		response.forEach(function (movie){
+			var mov ={}
+			mov.title = movie.title;
+			mov.img_url = movie.img_url;
+			var nVotes = movie.rating.length;
+			var sum=0;
+			if (nVotes !== 0){
+				movie.rating.forEach(function (user){
+					sum += user.rating;
+				})
+				mov.totalRating = sum/nVotes;
+
+			}else{
+				mov.totalRating = 0;
+			}
+			
+			array.push(mov);
+		})
+		array.sort(compare);
+		var columns= columnize(array,2);
+		$scope.col_left = columns[0];
+		$scope.col_rigth = columns[1];
+		
+	}
+	function compare(a,b) {
+		if (a.totalRating < b.totalRating )
+			return 1;
+		if (a.totalRating  > b.totalRating )
+			return -1;
+		return 0;
+	}
+	function columnize(input, cols) {
+		var arr = [];
+		arr.push(input.slice(0,Math.ceil(input.length/2)))
+		arr.push(input.slice(Math.ceil(input.length/2),input.length))
+		/*
+		for(i = 0; i < input.length; i++) {
+			var colIdx = i % cols;
+			arr[colIdx] = arr[colIdx] || [];
+			arr[colIdx].push(input[i]);
+		}*/
+		console.log(arr)
+		return arr;
 	}
 
-}])*/
-
+}])
 //ShowEventsController
 app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
-console.log($localStorage.user)
 
+
+$scope.checkUserInEvent = function (idEvent){
+	var index = $scope.eventos[idEvent].assistants.indexOf($localStorage.user)
+	if ( index === -1){
+		return false;
+	}else{
+		return true;
+	}
+}
+//Function ng-click leaveEvent
 $scope.leaveEvent = function (idEvent){
 	var userIndex = $scope.eventos[idEvent].assistants.map (function (user){
 		return user;
@@ -99,6 +144,8 @@ $scope.leaveEvent = function (idEvent){
 			});
 	}
 }
+
+//function ng-click goToEvent
 $scope.goToEvent = function (idEvent){
 	var userIndex = $scope.eventos[idEvent].assistants.map (function (user){
 		return user;
@@ -157,7 +204,7 @@ $scope.goToEvent = function (idEvent){
 
 	});
   //$window.location.reload();
-$scope.events = false;
+
 /*
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -175,6 +222,8 @@ $scope.events = false;
     }
   ];
 */
+
+//Load events inside $scope.events
 function loadEvents(response){
 	
 	var dates = response.map (function (event){
@@ -215,7 +264,7 @@ $scope.oneAtATime = true;
   //To show date in pretty format
   $scope.getDate = function  (string){
  	var date = new Date(string);
- 	return date.getDay()+"-"+date.getMonth()+"-"+date.getFullYear();
+ 	return date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
   }
 }])
 //user event controller
@@ -769,7 +818,7 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 			console.log("posUser " + positionUser)
 			//If user  not comment before
 			if(positionUser === -1){
-				alert("es menos 1")
+			
 				var FormData = {
 					'file': 'cartelera.json',
 					'action': 'newRating',
@@ -789,6 +838,9 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 					console.log("succ")
 					$scope.codeStatus = response.data;
 					console.log(response)
+					$localStorage.cartelera[positionMovie].rating.push({user: $localStorage.user,rating: rate})
+					
+					console.log($localStorage.cartelera);
 				}).
 				error(function(response) {
 					console.log("mal")
@@ -813,6 +865,11 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 				success(function(response) {
 					$scope.codeStatus = response.data;
 					console.log(response)
+					$localStorage.cartelera[positionMovie].rating[positionUser].user= $localStorage.user;
+					$localStorage.cartelera[positionMovie].rating[positionUser].rating =  rate;
+					
+					console.log($localStorage.cartelera);
+				
 				}).
 				error(function(response) {
 					console.log("mal")
@@ -841,7 +898,15 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 
 
 //Controller carousel
-app.controller("carouselController", function ($scope) {
+app.controller("carouselController",["$scope","$http","$localStorage", function ($scope,$http,$localStorage) {
+
+	//Load data to localStorage ----------------------------------------
+	$http.get("db/cartelera.json").success(function (response){
+		$localStorage.cartelera = response;
+	
+	})
+
+	//COnfig carousel
 	$scope.myInterval = 3000;
 	$scope.noWrapSlides = false;
 	$scope.active = 0;
@@ -897,7 +962,7 @@ app.controller("carouselController", function ($scope) {
 
   	return array;
   }
-})
+}])
 
 //CUstome directive to load menu
 app.directive('nglandingmenu',function(){
