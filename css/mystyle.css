@@ -54,4 +54,12 @@ textarea{
     color: black;
   }
 
-
+.blue {
+  color: blue; !important
+}
+.green{
+  color: green; !important
+}
+.green{
+  color: red; !important
+}

@@ -506,93 +506,153 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
 app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
 	$scope.dataLoaded = false;
 	$http.get("db/cartelera.json").success (function (data){
-        $scope.cartelera= data;
-        $scope.dataLoaded = true;
+		$scope.cartelera= data;
+		$scope.dataLoaded = true;
 
-    });
+	});
 
     //Function viewed film
     $scope.checkFilm = function (buttonPressed,movie,duration,genders){
     	$http.get("db/users.json").success(function (data){
 
+    		
     		var userPosition = getUserPosition(data,$localStorage.user);
-    		var moviePosition = getViewedMoviePosition(data,userPosition,movie);
-    		console.log("Posicion peli --> "+moviePosition)
-    		console.log("Nombre peli --> "+movie);
-    		console.log("Posicion user -->"+userPosition);
-    		//Si no está lo meto
-    		if (moviePosition === -1){
-    			console.log("no esta")
-    			var method = 'POST';
-				var url = 'db/prueba.php';
-				var FormData = {
-					'file': 'users.json',
-					'action': 'newFavoriteMovie',
-					'userPosition': userPosition,
-					'newViewedMovie': movie,
-					'duration': duration,
-					'genders': genders
-				};
-				var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-				//dataBase.send($http,method,url,FormData,headers);
-				
-	    		$http({
-					method: method,
-					url: url,
-					data: FormData,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-				}).
-				success(function(response) {
-					//$scope.codeStatus = response.data;
-					console.log("meto peli");
-					$http.get("db/users.json").success(function (dataDb){
-						$localStorage.users = dataDb;
+    		switch (buttonPressed){
+    			case 'view':
+    				
+    				var moviePosition = getViewedMoviePosition(data,userPosition,movie);
+		    		//Si no está lo meto
+		    		if (moviePosition === -1){
+		    			console.log("no esta")
+		    			var method = 'POST';
+		    			var url = 'db/prueba.php';
+		    			var FormData = {
+		    				'file': 'users.json',
+		    				'action': 'newFavoriteMovie',
+		    				'userPosition': userPosition,
+		    				'newViewedMovie': movie,
+		    				'duration': duration,
+		    				'genders': genders
+		    			};
+		    			var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-					});
-				}).
-				error(function(response) {
-					console.log("mal")
-					$scope.codeStatus = response || "Request failed";
-				});
+						//dataBase.send($http,method,url,FormData,headers);
+						$localStorage.users[userPosition].viewed.push({"title": movie, "duration": duration, "genders":genders })
+						$http({
+							method: method,
+							url: url,
+							data: FormData,
+							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+						}).
+						success(function(response) {
+							console.log("nueva viewd satisfactorio")
+						}).
+						error(function(response) {
+							console.log("mal")
+							$scope.codeStatus = response || "Request failed";
+						});
 
-	    	}else{// si está se elimina
-	    		console.log("si esta");
-	    		var method = 'POST';
-				var url = 'db/prueba.php';
-				var FormData = {
-					'file': 'users.json',
-					'action': 'deleteFavoriteMovie',
-					'userPosition': userPosition,
-					'moviePosition': moviePosition,
-				};
-				var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+			    	}else{// si está se elimina
+			    		console.log("si esta");
+			    		var method = 'POST';
+			    		var url = 'db/prueba.php';
+			    		var FormData = {
+			    			'file': 'users.json',
+			    			'action': 'deleteFavoriteMovie',
+			    			'userPosition': userPosition,
+			    			'moviePosition': moviePosition,
+			    		};
+			    		var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-				//dataBase.send($http,method,url,FormData,headers);
-				
-	    		$http({
-					method: method,
-					url: url,
-					data: FormData,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-				}).
-				success(function(response) {
-					$scope.codeStatus = response.data;
-					console.log("Elimino peli-->"+response.data)
-					$http.get("db/users.json").success(function (dataDb){
-						$localStorage.users = dataDb;
-					})
+						//dataBase.send($http,method,url,FormData,headers);
+						$localStorage.users[userPosition].viewed.splice(moviePosition,1);
+						$http({
+							method: method,
+							url: url,
+							data: FormData,
+							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+						}).
+						success(function(response) {
+							console.log("eliminacion viewed stisfactorio")
+						}).
+						error(function(response) {
+							console.log("mal")
+							$scope.codeStatus = response || "Request failed";
+						});
+					}
+					break;
 
-				}).
-				error(function(response) {
-					console.log("mal")
-					$scope.codeStatus = response || "Request failed";
-				});
+					case 'bookmark':
+					var moviePosition = getBookmarkMoviePosition(data,userPosition,movie);
+					console.log("bookmark position movie-->"+moviePosition)
+					//Si no está lo meto
+					if (moviePosition === -1){
+						console.log("no esta")
+						var method = 'POST';
+						var url = 'db/prueba.php';
+						var FormData = {
+							'file': 'users.json',
+							'action': 'newBookmark',
+							'userPosition': userPosition,
+							'newViewedMovie': movie,
+							'duration': duration,
+							'genders': genders
+						};
+						var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-	    	}
-    })
-   
-}
+						//dataBase.send($http,method,url,FormData,headers);
+						$localStorage.users[userPosition].bookmark.push({"title": movie, "duration": duration, "genders":genders })
+						$http({
+							method: method,
+							url: url,
+							data: FormData,
+							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+						}).
+						success(function(response) {
+
+						}).
+						error(function(response) {
+							console.log("mal")
+							$scope.codeStatus = response || "Request failed";
+						});
+
+			    	}else{// si está se elimina
+			    		console.log("si esta");
+			    		var method = 'POST';
+			    		var url = 'db/prueba.php';
+			    		var FormData = {
+			    			'file': 'users.json',
+			    			'action': 'deleteBookmark',
+			    			'userPosition': userPosition,
+			    			'moviePosition': moviePosition,
+			    		};
+			    		var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+
+						//dataBase.send($http,method,url,FormData,headers);
+						$localStorage.users[userPosition].bookmark.splice(moviePosition,1);
+						$http({
+							method: method,
+							url: url,
+							data: FormData,
+							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+						}).
+						success(function(response) {
+
+						}).
+						error(function(response) {
+							console.log("mal")
+							$scope.codeStatus = response || "Request failed";
+						});
+					}
+					break;
+					case 'favorite':
+					break;
+
+				}
+			})
+	
+	}
 
     //Get user poition
     function getUserPosition(data,username){
@@ -606,6 +666,49 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 				return movieViewed.title;
 			}).indexOf(movie);
     }
+    function getBookmarkMoviePosition (data,userPosition,movie){
+    	return data[userPosition].bookmark.map(function(movieViewed){
+				return movieViewed.title;
+			}).indexOf(movie);
+    }
+     function getFavoritekMoviePosition (data,userPosition,movie){
+    	return data[userPosition].bookmark.map(function(movieViewed){
+				return movieViewed.title;
+			}).indexOf(movie);
+    }
+    
+
+    $scope.checkViewMovie = function (title){
+    	
+    	var userPosition = getUserPosition($localStorage.users,$localStorage.user);
+    	var index = $localStorage.users[userPosition].viewed.map(function (movie){
+    		return movie.title;
+    	}).indexOf(title);
+    
+    	if (index === -1) {
+    		return false;
+    		console.log("false")
+    	}else{
+    		console.log("true")
+    		return true;
+    	}
+    }
+
+    $scope.checkBookmarkMovie = function (title){
+    	
+    	var userPosition = getUserPosition($localStorage.users,$localStorage.user);
+    	var index = $localStorage.users[userPosition].bookmark.map(function (movie){
+    		return movie.title;
+    	}).indexOf(title);
+    
+    	if (index === -1) {
+    		return false;
+    		console.log("false")
+    	}else{
+    		console.log("true")
+    		return true;
+    	}
+    }
     
 
 }])
@@ -618,7 +721,7 @@ app.controller("movieController",["$scope","$http","$routeParams",'$localStorage
 	$localStorage.movie = $routeParams.title;
 	$scope.comments="";
 
-
+	//Load  from file 
 	$http.get("db/cartelera.json").success (function (data){
         $scope.cartelera= data;
         $scope.dataLoaded = true;
@@ -633,7 +736,7 @@ app.controller("movieController",["$scope","$http","$routeParams",'$localStorage
     });
 	
 	
-   
+   //Send new comment
     $scope.sendComment = function (comment,movie){
     	//Save in $scope.comments
     	var user = $localStorage.user;
@@ -644,7 +747,6 @@ app.controller("movieController",["$scope","$http","$routeParams",'$localStorage
 				return movie.title;
 			}).indexOf(movie);
 			
-
 			var FormData = {
 				'file': 'cartelera.json',
 				'action': 'newComment',
@@ -778,6 +880,7 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 		$scope.overStar = value;
 		$scope.percent = 100 * (value / $scope.max);
 	};
+	
 	$http.get("db/cartelera.json").success(function (data){
 			//Find if user has comment before
 			var positionMovie = data.map(function (movie){
@@ -795,7 +898,9 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 			if(positionUser === -1){
 				$scope.rate = 0;
 			}else{
+				$scope.rate = $localStorage.cartelera[positionMovie].rating[positionUser].rating
 				$scope.rate = data[positionMovie].rating[positionUser].rating;
+
 			}
 	})
 
@@ -905,6 +1010,11 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
 		$localStorage.cartelera = response;
 	
 	})
+	$http.get("db/users.json").success(function (response){
+		$localStorage.users = response;
+	
+	})
+
 
 	//COnfig carousel
 	$scope.myInterval = 3000;

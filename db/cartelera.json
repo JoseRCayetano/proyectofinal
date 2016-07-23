@@ -12,6 +12,18 @@
             {
                 "user": "user1",
                 "comment": "coment1"
+            },
+            {
+                "user": "user1",
+                "comment": "comentario 2"
+            },
+            {
+                "user": "user1",
+                "comment": "comentario 3"
+            },
+            {
+                "user": "user1",
+                "comment": "3213213"
             }
         ],
         "rating": [
@@ -21,7 +33,7 @@
             },
             {
                 "user": "user1",
-                "rating": 6
+                "rating": 1
             }
         ],
         "cines": [
@@ -256,7 +268,7 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 6
+                "rating": 5
             }
         ],
         "cines": [
@@ -2497,7 +2509,12 @@
             "Fantasía"
         ],
         "comments": [],
-        "rating": [],
+        "rating": [
+            {
+                "user": "user1",
+                "rating": 4
+            }
+        ],
         "cines": [
             {
                 "name": "Cinesur Nervión",
@@ -2573,7 +2590,7 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 6
+                "rating": 5
             }
         ],
         "cines": [

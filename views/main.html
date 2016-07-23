@@ -37,9 +37,9 @@
 					<div class="card-body">
 						
 						<ul class="list-unstyled list-inline text-center">
-							<li ng-click="checkFilm('view',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-eye-open"></span></li>
-							<li><span class="glyphicon glyphicon-bookmark"></span></li>
-							<li><span class="glyphicon glyphicon-heart-empty"></span></li>
+							<li ng-click="checkFilm('view',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-eye-open" ng-class="{blue: checkViewMovie(pelicula.title)}"></span></li>
+							<li ng-click="checkFilm('bookmark',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-bookmark" ng-class="{green: checkBookmarkMovie(pelicula.title)}"></span></li>
+							<li ng-click="checkFilm('favorite',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-heart-empty" ng-class="{red: checkFavoritekMovie(pelicula.title)}"></span></li>
 							
 						</ul>
 
