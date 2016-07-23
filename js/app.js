@@ -504,12 +504,14 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
 
 //Controller main page user
 app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
-	$scope.dataLoaded = false;
+	$scope.dataLoaded = true;
+	/*
 	$http.get("db/cartelera.json").success (function (data){
 		$scope.cartelera= data;
 		$scope.dataLoaded = true;
 
-	});
+	});*/
+	$scope.cartelera = $localStorage.cartelera;
 
     //Function viewed film
     $scope.checkFilm = function (buttonPressed,movie,duration,genders){
@@ -517,7 +519,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
     		
     		var userPosition = getUserPosition(data,$localStorage.user);
-
     		switch (buttonPressed){
     			case 'view':
     				
@@ -647,6 +648,67 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 					}
 					break;
 					case 'favorite':
+					var moviePosition = getFavoriteMoviePosition (data,userPosition,movie);
+					console.log("Favorite position movie-->"+moviePosition)
+					//Si no está lo meto
+					if (moviePosition === -1){
+						console.log("no esta")
+						var method = 'POST';
+						var url = 'db/prueba.php';
+						var FormData = {
+							'file': 'users.json',
+							'action': 'newFavorite',
+							'userPosition': userPosition,
+							'newViewedMovie': movie,
+							'duration': duration,
+							'genders': genders
+						};
+						var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+
+						//dataBase.send($http,method,url,FormData,headers);
+						$localStorage.users[userPosition].favorite.push({"title": movie, "duration": duration, "genders":genders })
+						$http({
+							method: method,
+							url: url,
+							data: FormData,
+							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+						}).
+						success(function(response) {
+
+						}).
+						error(function(response) {
+							console.log("mal")
+							$scope.codeStatus = response || "Request failed";
+						});
+
+			    	}else{// si está se elimina
+			    		console.log("si esta");
+			    		var method = 'POST';
+			    		var url = 'db/prueba.php';
+			    		var FormData = {
+			    			'file': 'users.json',
+			    			'action': 'deleteFavorite',
+			    			'userPosition': userPosition,
+			    			'moviePosition': moviePosition,
+			    		};
+			    		var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+
+						//dataBase.send($http,method,url,FormData,headers);
+						$localStorage.users[userPosition].favorite.splice(moviePosition,1);
+						$http({
+							method: method,
+							url: url,
+							data: FormData,
+							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+						}).
+						success(function(response) {
+
+						}).
+						error(function(response) {
+							console.log("mal")
+							$scope.codeStatus = response || "Request failed";
+						});
+					}
 					break;
 
 				}
@@ -671,8 +733,8 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 				return movieViewed.title;
 			}).indexOf(movie);
     }
-     function getFavoritekMoviePosition (data,userPosition,movie){
-    	return data[userPosition].bookmark.map(function(movieViewed){
+     function getFavoriteMoviePosition (data,userPosition,movie){
+    	return data[userPosition].favorite.map(function(movieViewed){
 				return movieViewed.title;
 			}).indexOf(movie);
     }
@@ -709,6 +771,22 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
     		return true;
     	}
     }
+    $scope.checkFavoriteMovie = function (title){
+    	
+    	var userPosition = getUserPosition($localStorage.users,$localStorage.user);
+    	var index = $localStorage.users[userPosition].favorite.map(function (movie){
+    		return movie.title;
+    	}).indexOf(title);
+    
+    	if (index === -1) {
+    		return false;
+    		console.log("false")
+    	}else{
+    		console.log("true")
+    		return true;
+    	}
+    }
+    
     
 
 }])

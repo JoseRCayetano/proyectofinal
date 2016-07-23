@@ -26,6 +26,12 @@ switch ($data->file){
 			case 'deleteBookmark':
 				deleteBookmark ($data);
 			break;
+			case 'newFavorite':
+				newFavorite ($data);
+			break;
+			case 'deleteFavorite':
+				deleteFavorite($data);
+			break;
 		}
 	break;
 	case 'cartelera.json':
@@ -116,6 +122,25 @@ function newBookmark ($data){
 	file_put_contents($file, $jsonData);
 	
 }
+function newFavorite ($data){
+
+	$buttonPressed = $data->buttonPressed;
+	$file = $data->file; //File to read/write
+
+	$userPosition = (int)$data->userPosition; //Position user
+	
+	//New object movie
+	$newMovie = [];
+	$newMovie["title"] = $data->newViewedMovie;
+	$newMovie["duration"] = $data->duration;
+	$newMovie["genders"] = $data->genders;
+		
+	$tempArray = json_decode(file_get_contents($file));
+	array_push($tempArray[$userPosition]->favorite,$newMovie);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+	
+}
 
 function deleteFavoriteMovie ($data){
 	$file = $data->file; //File to read/write
@@ -147,6 +172,22 @@ function deleteBookmark ($data){
 	file_put_contents($file, $jsonData);
 	
 }
+function deleteFavorite ($data){
+	$file = $data->file; //File to read/write
+
+	$userPosition = (int)$data->userPosition; //Position user
+	$moviePosition = (int)$data->moviePosition;
+	
+	
+	$tempArray = json_decode(file_get_contents($file));
+
+	//unset($tempArray[$userPosition]->viewed[$moviePosition]);
+	array_splice($tempArray[$userPosition]->favorite,$moviePosition,1);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	file_put_contents($file, $jsonData);
+	
+}
+
 function newComment ($data){
 	$file = $data->file;
 
