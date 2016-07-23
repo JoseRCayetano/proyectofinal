@@ -98,5 +98,25 @@
         "assistants": [
             "user1"
         ]
+    },
+    {
+        "id": 10,
+        "movie": "Demolición",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-04T10:52:05.963Z",
+        "hour": "12:52",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 11,
+        "movie": "Ninja Turtles: Fuera de las sombras",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-08-06T11:02:09.301Z",
+        "hour": "13:2",
+        "assistants": [
+            "user1"
+        ]
     }
 ]

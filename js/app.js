@@ -101,7 +101,9 @@ app.controller("movieRatingController",["$scope","$http","$localStorage",functio
 //ShowEventsController
 app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
 
-
+$scope.loadNewEvents = function (){
+	location.reload();
+}
 $scope.checkUserInEvent = function (idEvent){
 	var index = $scope.eventos[idEvent].assistants.indexOf($localStorage.user)
 	if ( index === -1){
