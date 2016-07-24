@@ -15,6 +15,9 @@
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
 	<!-- Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
 
@@ -34,13 +37,20 @@
 			left: 0;    
 		}
 	</style>
-	<title>Cinevilla</title>
+	<title>Secine</title>
 </head>
 
 <body>
-	
-	<div id ="cont" ng-view></div>
 
+	<div id="wrap">
+	
+		<div id ="cont" ng-view></div>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid repellat error, ipsa praesentium laboriosam omnis hic, asperiores soluta repellendus quasi sapiente fugit facere optio labore deleniti facilis, id, vel neque.</p>
+		</div>
+	</footer>
 	<!-- Angular -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-route.min.js"></script>
@@ -76,5 +86,6 @@
 			$("#wrapper").toggleClass("toggled");
 		});
 	</script>
+	
 </body>
 </html>
