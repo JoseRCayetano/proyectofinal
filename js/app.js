@@ -1,5 +1,5 @@
 
-var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies','uiGmapgoogle-maps','ngAnimate']);//en el array inyectamos dependencias
+var app = angular.module('cine',['ui.bootstrap','ngRoute','ngStorage','ngCookies','uiGmapgoogle-maps','ngAnimate','ngMessages']);//en el array inyectamos dependencias
 
 app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvider,GoogleMapApiProviders) {
 	$routeProvider
@@ -517,7 +517,9 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
     //Function viewed film
     $scope.checkFilm = function (buttonPressed,movie,duration,genders){
-    	$http.get("db/users.json").success(function (data){
+
+    	var data = $localStorage.users;
+    	//$http.get("db/users.json").success(function (data){
 
     		
     		var userPosition = getUserPosition(data,$localStorage.user);
@@ -714,7 +716,7 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 					break;
 
 				}
-			})
+			//})
 	
 	}
 
@@ -864,69 +866,76 @@ app.controller("menuController",["$scope","$location",'$localStorage',function($
     };
 }]);
 
-app.controller("formRegisterController" ,['$scope','$http','$location',function ($scope,$http,$location){
+app.controller("formRegisterController" ,['$scope','$http','$location','$localStorage',function ($scope,$http,$location,$localStorage){
 
-	
+	$scope.error = false;
+	$scope.success = false;
 	var method = 'POST';
 	var url = 'db/prueba.php';
 	$scope.codeStatus = "";
-	$scope.save = function() {
-		
-		var FormData = {
-			'file': 'users.json',
-			'action': 'newUser',
-			'user': $scope.user, 
-			'password': $scope.password,
-			'firstname': $scope.firstname,
-			'lastname': $scope.lastname,
-			'email': $scope.email
-		};
+	$scope.save = function(user) {
 
-		//application/json
-		//
-		$http({
-			method: method,
-			url: url,
-			data: FormData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		}).
-		success(function(response) {
-			$scope.codeStatus = response.data;
-			console.log(response)
-		}).
-		error(function(response) {
-			console.log("mal")
-			$scope.codeStatus = response || "Request failed";
-		});
-		return false;
+		if (!checkUserName(user)){
+			$scope.success = true;
+			$scope.error = false;
+			console.log("User metido --> "+user)
+			var FormData = {
+				'file': 'users.json',
+				'action': 'newUser',
+				'user': $scope.user, 
+				'password': $scope.password,
+				'firstname': $scope.firstname,
+				'lastname': $scope.lastname,
+				'email': $scope.email
+			};
+
+			//application/json
+			//
+			$http({
+				method: method,
+				url: url,
+				data: FormData,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			}).
+			success(function(response) {
+				$scope.codeStatus = response.data;
+				console.log(response)
+				
+			}).
+			error(function(response) {
+				console.log("mal")
+				$scope.codeStatus = response || "Request failed";
+			});
+		}
+		else{
+			$scope.error =true;
+			$scope.success = false;
+		}
+	
 	};
 
-		/*console.log("function");
-		$http.post('db/dbController.php', { 
-										fichero: 'db/users.json',
-										action: 'new',
-										user: $scope.user, 
-										password: $scope.password,
-										firstname: $scope.firstname,
-										lastname: $scope.lastname,
-										email: $scope.email
-										})
-		.success(function(data) {
-			
-			$scope.names = eval(data);
-			console.log(data)
-			console.log("success");
-		})
-		.error(function(data) {
-			console.log('Error:');
-		});
-		*/
+	function checkUserName (username){
+
+			var index = $localStorage.users.map (function (user){
+				return user.user;
+			}).indexOf(username)
+
+			if (index === -1){
+				console.log("no esta")
+				return false;
+			}else{
+				console.log("esta")
+				return true;
+			}
+		
+	}
+
 }]);
 
 //Login controller
 app.controller("formLoginController",['$scope','$http','$location','$localStorage',function ($scope,$http,$location,$localStorage){
 	//Check if credential are in db
-	
+	$scope.error = false;
 	$scope.checkUser = function(){
 		var url="db/users.json";
 		$http.get(url).success(function (dataDb){
@@ -943,6 +952,8 @@ app.controller("formLoginController",['$scope','$http','$location','$localStorag
 		if (index != -1){
 			$localStorage.user = user;
 			$location.path("/main");
+		}else{
+			$scope.error = true;
 		}
 	
 	}
@@ -1097,7 +1108,7 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
 
 
 	//COnfig carousel
-	$scope.myInterval = 3000;
+	$scope.myInterval = 5000;
 	$scope.noWrapSlides = false;
 	$scope.active = 0;
 	var slides = $scope.slides = [];
@@ -1107,7 +1118,7 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
 		
 		slides.push({
 			image: 'img/landing_carousel/'+slides.length+".jpg",
-			text: ['Vive la mejor experiencia del cine','Disfruta de las mejores películas','Junto a personas de tus mismos intereses','A que esperas'][slides.length % 4],
+			text: ['Vive la mejor experiencia del cine','Disfruta de las mejores películas','Y de los momentos más épicos','Junto a personas de tus mismos intereses'][slides.length % 4],
 			id: currIndex++
 		});
 	};
@@ -1117,7 +1128,7 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
 		assignNewIndexesToSlides(indexes);
 	};
 
-	for (var i = 0; i < 5; i++) {
+	for (var i = 0; i < 4; i++) {
 		$scope.addSlide();
 	}
 

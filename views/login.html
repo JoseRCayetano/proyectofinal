@@ -4,22 +4,31 @@
 <div class="container" ng-controller="formLoginController">
   <div class="row">
     <div class="col-md-6 col-md-offset-2 ">
-      <form class="form-horizontal">
+      <form name="form" class="form-horizontal">
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Usuario</label>
+          <label for="inputUser" class="col-sm-2 control-label">Usuario</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="User" ng-model="user" required>
+            <input type="text" class="form-control" id="user" placeholder="User" ng-model="user" name="user" required>
+            <div ng-messages="form.user.$error" >
+              <p ng-message="required"> El nombre de usuario es obligatorio</p>
+            </div>
           </div>
         </div>
         <div class="form-group">
           <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="password" required>
+            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password" name="password" required>
+            <div ng-messages="form.password.$error" >
+              <p ng-message="required"> La password es obligatoria</p>
+            </div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="button" class="btn btn-raised btn-primary" ng-click="checkUser()">Aceptar</button>
+            <button type="button" class="btn btn-raised btn-primary" ng-click="checkUser()" ng-disabled="form.$invalid">Aceptar</button>
+            <div ng-show="error" class="alert alert-danger fade in">
+              <strong>Usuario o password incorrectos.</strong> Por favor vuelva a intentarlo
+          </div>
           </div>
         </div>
       </form>

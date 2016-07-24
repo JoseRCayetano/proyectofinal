@@ -80,7 +80,7 @@ function newUser($data){
 	 //añadimos los nuevos datos al array
 	array_push($tempArray, $newData);
 	//convierte el array php con los nuevos datos a json
-	$jsonData = json_encode($tempArray);
+	$jsonData = json_encode($tempArray,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	//reemplaza los datos anteriores del archivo json con los nuevos datos
 	file_put_contents($file, $jsonData);
 }

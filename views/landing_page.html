@@ -1,15 +1,43 @@
 	<nglandingmenu></nglandingmenu>
 	<div ng-controller="carouselController">
-		<div style="">
-			<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-				<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-					<img  class="img-responsive" ng-src="{{slide.image}}" style="margin:auto;">
-					<div class="carousel-caption">
-						<h4>{{slide.text}}</h4>
+		<div class="container-fluid no-padding">
+			<div class="row no-padding">
+				<div class="col-md-12 no-padding" >
+					<div style="">
+						<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+							<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+							<img   ng-src="{{slide.image}}" style="width:100%;   ">
+								<div class="carousel-caption">
+									<h2>{{slide.text}}</h2>
+								</div>
+							</uib-slide>
+						</uib-carousel>
 					</div>
-				</uib-slide>
-			</uib-carousel>
+				</div>
+			</div>
 		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-med-12">
+					<h2>sdfsdfsdf</h2>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id suscipit rem consequuntur, esse facere accusantium fugiat, inventore nam iusto cum. Facilis sed perspiciatis, ex optio excepturi. Voluptatibus, provident, nihil?
+
+
+				</div>
+			</div>
+		</div>
+		
 		
 	</div>
 

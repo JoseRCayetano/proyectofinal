@@ -55,11 +55,54 @@ textarea{
   }
 
 .blue {
-  color: blue; !important
+  color: blue; 
 }
 .green{
-  color: green; !important
+  color: green; 
 }
-.green{
-  color: red; !important
+.red{
+  color: red; 
 }
+.no-padding {
+  padding: 0;
+}
+
+/* CSS Menu Lanfing page*/
+
+.up{
+  position:arelative;
+  top: 0;
+ 
+}
+.carousel {
+  /*position: absolute;*/
+  top: 0;
+  width: 100%;
+}
+.navbar-landingpage {
+  position:absolute;
+  top:0;
+  z-index:10;
+  width: 100%;
+  background-color: rgba(0,0,0,0.0)!important; 
+}
+.navbar-landingpage li:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+.carousel-caption, .carousel-caption h2{
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* register */ 
+#register {
+  background: url('../img/design/register.jpg') fixed center no-repeat;
+  background-size:100%;
+  width:100%;
+  height: 100%;
+}
+
+/*
+.button-landingpage{
+  /*background-color: rgba(250,250,250,0.5);!important
+}*/

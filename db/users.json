@@ -1,6 +1,5 @@
 [
     {
-        "id": "1",
         "user": "user1",
         "pass": "pass1",
         "name": "usuario1",
@@ -11,7 +10,6 @@
         "favorite": []
     },
     {
-        "id": "2",
         "user": "user2",
         "pass": "pass2",
         "name": "usuario2",
@@ -22,7 +20,6 @@
         "favorite": []
     },
     {
-        "id": "3",
         "user": "user3",
         "pass": "pass3",
         "name": "usuario3",
