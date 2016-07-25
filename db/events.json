@@ -118,5 +118,15 @@
         "assistants": [
             "user1"
         ]
+    },
+    {
+        "id": 12,
+        "movie": "Antes de ti",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-09T09:42:05.129Z",
+        "hour": "14:45",
+        "assistants": [
+            "user1"
+        ]
     }
 ]

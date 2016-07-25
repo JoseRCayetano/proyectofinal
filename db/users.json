@@ -5,7 +5,16 @@
         "name": "usuario1",
         "apellido": "apellido1",
         "email": "email1@mail.com",
-        "viewed": [],
+        "viewed": [
+            {
+                "title": "Antes de ti",
+                "duration": "110",
+                "genders": [
+                    "Drama",
+                    "Romance"
+                ]
+            }
+        ],
         "bookmark": [],
         "favorite": []
     },
@@ -28,5 +37,38 @@
         "viewed": [],
         "bookmark": [],
         "favorite": []
+    },
+    {
+        "user": "octavio",
+        "password": "123",
+        "firstname": "octavio",
+        "lastname": "hermoso",
+        "mail": "octavio@gmail.com",
+        "groups": [],
+        "favorite": [],
+        "viewed": [],
+        "bookmark": []
+    },
+    {
+        "user": "werewrwer",
+        "password": "pass1",
+        "firstname": "octavio",
+        "lastname": "hermoso",
+        "mail": "octavio@gmail.com",
+        "groups": [],
+        "favorite": [],
+        "viewed": [],
+        "bookmark": []
+    },
+    {
+        "user": "user5",
+        "password": "qweqwe",
+        "firstname": "qweqwe",
+        "lastname": "qeqwe",
+        "mail": "qweqeqwe",
+        "groups": [],
+        "favorite": [],
+        "viewed": [],
+        "bookmark": []
     }
 ]

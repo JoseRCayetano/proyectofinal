@@ -33,7 +33,7 @@
             },
             {
                 "user": "user1",
-                "rating": 1
+                "rating": 6
             }
         ],
         "cines": [
@@ -268,7 +268,7 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 10
+                "rating": 0
             }
         ],
         "cines": [
@@ -473,12 +473,16 @@
             {
                 "user": "user1",
                 "comment": "no me gusta"
+            },
+            {
+                "user": "user1",
+                "comment": "ewrwerwer"
             }
         ],
         "rating": [
             {
                 "user": "user1",
-                "rating": 10
+                "rating": 2
             }
         ],
         "cines": [
@@ -1058,7 +1062,16 @@
             "Drama",
             "Suspense"
         ],
-        "comments": [],
+        "comments": [
+            {
+                "user": "user1",
+                "comment": "erwerwerwerwerwer"
+            },
+            {
+                "user": "user1",
+                "comment": "werwerwerwer"
+            }
+        ],
         "rating": [],
         "cines": [
             {
@@ -2512,7 +2525,7 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 4
+                "rating": 10
             }
         ],
         "cines": [

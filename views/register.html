@@ -2,27 +2,26 @@
 
 <div id="register" class="container" ng-controller="formRegisterController">
   <div class="row">
-    <div class="col-md-6 col-md-offset-2 vcenter">
+    <div class="col-md-6 col-md-offset-3">
       <div class="form-box">
         <div class="form-top">
           <div class="form-top-left">
             <h3>Regístrate Ahora</h3>
             <p>Y disfruta del mejor cine en la mejor compañía!</p>
           </div>
-          <div class="form-top-right">
-            <i class="fa fa-pencil"></i>
-          </div>
         </div>
         <div class="form-bottom">
           <form role="form" action=""  class="registration-form" name ="form">
             <div class="form-group">
-              <label class="sr-only label-floating" for="form-user-name">Username</label>
+            <i class="fa fa-user" aria-hidden="true"></i>
+              <label class="sr-only label-floating" for="form-user-name"></label>
               <input type="text" name="user" placeholder="User name..." class="form-user-name form-control" id="form-user-name" ng-model="user" required>
               <div ng-messages="form.user.$error" >
                 <p ng-message="required"> Campo obligatorio</p>
               </div>
             </div>
             <div class="form-group">
+            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
               <label class="sr-only" for="form-password">Password</label>
               <input type="password" name="password" placeholder="Passowrd.." class="form-password form-control" id="form-password" ng-model="password" required>
               <div ng-messages="form.password.$error" >
@@ -30,6 +29,7 @@
               </div>
             </div>
             <div class="form-group">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
               <label class="sr-only" for="first-name">first name</label>
               <input type="text" name="firstname" placeholder="first name..." class="form-first-name form-control" id="form-first-name" ng-model="firstname" required>
             </div>
@@ -37,6 +37,7 @@
               <p ng-message="required"> Campo obligatorio</p>
             </div>
             <div class="form-group">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
               <label class="sr-only" for="form-last-name">Last name</label>
               <input type="text" name="lastname" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" ng-model="lastname" required>
               <div ng-messages="form.lastname.$error" >
@@ -44,6 +45,7 @@
               </div>
             </div>
             <div class="form-group">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
               <label class="sr-only" for="form-email">Email</label>
               <input type="text" name="email" placeholder="Email..." class="form-email form-control" id="form-email" ng-model="email" required>
             </div>

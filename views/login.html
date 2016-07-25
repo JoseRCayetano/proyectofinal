@@ -1,12 +1,17 @@
 
 <nglandingmenu></nglandingmenu>
 
-<div class="container" ng-controller="formLoginController">
+<div id="login" class="container" ng-controller="formLoginController">
   <div class="row">
-    <div class="col-md-6 col-md-offset-2 ">
+    <div class="col-md-6 col-md-offset-3 ">
       <form name="form" class="form-horizontal">
+      <div class="form-top-left">
+            <h3>Login de usuario</h3>
+            <p>Entra y empieza tu aventura</p>
+          </div>
         <div class="form-group">
-          <label for="inputUser" class="col-sm-2 control-label">Usuario</label>
+         <!--<label for="inputUser" class="col-sm-2 control-label">Usuario</label>-->
+          <label for="inputUser" class="col-sm-2 control-label"><i class="fa fa-user" aria-hidden="true"></i></label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="user" placeholder="User" ng-model="user" name="user" required>
             <div ng-messages="form.user.$error" >
@@ -15,8 +20,10 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <!--<label for="inputPassword3" class="col-sm-2 control-label">Password</label>-->
+           <label for="inputPassword3" class="col-sm-2 control-label"><i class="fa fa-unlock-alt" aria-hidden="true"></i></label>
           <div class="col-sm-10">
+
             <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password" name="password" required>
             <div ng-messages="form.password.$error" >
               <p ng-message="required"> La password es obligatoria</p>
