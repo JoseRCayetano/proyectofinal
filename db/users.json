@@ -70,5 +70,16 @@
         "favorite": [],
         "viewed": [],
         "bookmark": []
+    },
+    {
+        "user": "user7",
+        "password": "pass7",
+        "firstname": "nombre7",
+        "lastname": "apellido7",
+        "mail": "correo7@sdsd.com",
+        "groups": [],
+        "favorite": [],
+        "viewed": [],
+        "bookmark": []
     }
 ]
