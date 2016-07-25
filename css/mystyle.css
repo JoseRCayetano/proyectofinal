@@ -149,7 +149,7 @@ color: white;
 ::-webkit-scrollbar { 
     display: none; 
 }
-.active-user-menu{
+.activesubmenu{
   border-bottom: 1px solid red;
   background-color: rgba(0,0,0,0.5)!important;
 }
@@ -170,13 +170,12 @@ form .fa{
   color:#2D4671;
 }
 /* Active exterior menu*/
-.activemenu {
-  background-color: rgba(255,255,255,0.5) !important;
+.active {
+  background-color: rgba(42, 131, 218, 0.5) !important;
+  
 }
 
-.center {
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
+/* Sub menu user*/
+.nav-tabs{
+  border-bottom: 0;
 }

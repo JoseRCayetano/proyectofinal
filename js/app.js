@@ -506,6 +506,8 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
 
 //Controller main page user
 app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
+		
+
 	$scope.dataLoaded = true;
 	/*
 	$http.get("db/cartelera.json").success (function (data){
@@ -514,6 +516,7 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
 	});*/
 	$scope.cartelera = $localStorage.cartelera;
+
 
     //Function viewed film
     $scope.checkFilm = function (buttonPressed,movie,duration,genders){
@@ -857,12 +860,22 @@ app.controller("movieController",["$scope","$http","$routeParams",'$localStorage
     }
 
 }])
+//Active submenu
+//Active menu
+app.controller("userSubmenuController",["$scope","$location",'$localStorage',function($scope,$location,$localStorage){
+	$scope.userlogged= $localStorage.user; //To show who is logged
+	$scope.isActive = function (viewLocation) {
+        return viewLocation === $location.path();
+
+    };
+}]);
 
 //Active menu
 app.controller("menuController",["$scope","$location",'$localStorage',function($scope,$location,$localStorage){
 	$scope.userlogged= $localStorage.user; //To show who is logged
-	$scope.isActive = function (viewLocation) { 
+	$scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
+
     };
 }]);
 

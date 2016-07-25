@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse   ng-controller="menuController">
+<nav class="navbar navbar-inverse"   ng-controller="menuController">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			
@@ -15,10 +15,11 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li ng-class="{ active: isActive('/login')}"><a href="#/login" ">Acceder</a></li>
-					<li class="dropdown" ng-class="{activemenu: isActive('/register')}">
+					<li ng-class="{ active: isActive('/login')}">
+						<a href="#/login" ">Acceder</a>
+					</li>
+					<li class="dropdown" ng-class="{ active: isActive('/register') }">
 						<a href="#/register" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Registrarse</a>
-
 					</li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
