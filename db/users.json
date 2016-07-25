@@ -5,16 +5,7 @@
         "name": "usuario1",
         "apellido": "apellido1",
         "email": "email1@mail.com",
-        "viewed": [
-            {
-                "title": "Antes de ti",
-                "duration": "110",
-                "genders": [
-                    "Drama",
-                    "Romance"
-                ]
-            }
-        ],
+        "viewed": [],
         "bookmark": [],
         "favorite": []
     },

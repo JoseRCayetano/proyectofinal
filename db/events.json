@@ -12,119 +12,79 @@
     {
         "id": 1,
         "movie": "Antes de ti",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-25T13:52:19.333Z",
-        "hour": "15:52",
-        "assistants": []
+        "cine": "Ábaco Cines Camas",
+        "date": "2016-07-27T21:51:13.076Z",
+        "hour": "23:51",
+        "assistants": [
+            "user1"
+        ]
     },
     {
         "id": 2,
-        "movie": "Buscando a Dory",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-26T13:53:37.222Z",
-        "hour": "15:53",
-        "assistants": []
+        "movie": "Antes de ti",
+        "cine": "Ábaco Cines Camas",
+        "date": "2016-07-28T21:51:50.984Z",
+        "hour": "23:51",
+        "assistants": [
+            "user1"
+        ]
     },
     {
         "id": 3,
-        "movie": "Buscando a Dory",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-28T13:54:17.901Z",
-        "hour": "15:54",
+        "movie": "Antes de ti",
+        "cine": "Cinesur Nervión",
+        "date": "2016-07-28T22:00:00.062Z",
+        "hour": "0:0",
         "assistants": [
             "user1"
         ]
     },
     {
         "id": 4,
-        "movie": "Buscando a Dory",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-08-03T13:55:32.864Z",
-        "hour": "15:55",
+        "movie": "Expediente Warren: El Caso Enfield",
+        "cine": "Ábaco Cines Camas",
+        "date": "2016-07-28T22:01:14.481Z",
+        "hour": "0:1",
         "assistants": [
-            "user2",
             "user1"
         ]
     },
     {
         "id": 5,
-        "movie": "Independence Day: Contraataque",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-27T13:59:09.609Z",
-        "hour": "15:59",
+        "movie": "1944",
+        "cine": "Cinesur Nervión",
+        "date": "2016-07-29T22:01:49.909Z",
+        "hour": "0:1",
         "assistants": [
-            "user2",
             "user1"
         ]
     },
     {
         "id": 6,
-        "movie": "Expediente Warren: El Caso Enfield",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-08-01T14:02:03.298Z",
-        "hour": "16:2",
+        "movie": "Ninja Turtles: Fuera de las sombras",
+        "cine": "Ábaco Cines Camas",
+        "date": "2016-07-30T22:03:45.886Z",
+        "hour": "0:3",
         "assistants": [
-            "user2",
             "user1"
         ]
     },
     {
         "id": 7,
-        "movie": "Expediente Warren: El Caso Enfield",
-        "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-07-29T14:04:44.399Z",
-        "hour": "16:4",
+        "movie": "Dos buenos tipos",
+        "cine": "Cinesur Nervión",
+        "date": "2016-07-31T22:04:47.705Z",
+        "hour": "0:4",
         "assistants": [
-            "user2",
             "user1"
         ]
     },
     {
         "id": 8,
-        "movie": "Independence Day: Contraataque",
-        "cine": "Ábaco Cines Camas",
-        "date": "2016-08-02T14:16:10.151Z",
-        "hour": "16:16",
-        "assistants": [
-            "user2"
-        ]
-    },
-    {
-        "id": 9,
-        "movie": "Expediente Warren: El Caso Enfield",
-        "cine": "Ábaco Cines Camas",
-        "date": "2016-08-05T15:34:20.485Z",
-        "hour": "17:34",
-        "assistants": [
-            "user1"
-        ]
-    },
-    {
-        "id": 10,
-        "movie": "Demolición",
-        "cine": "Cinesur Nervión",
-        "date": "2016-08-04T10:52:05.963Z",
-        "hour": "12:52",
-        "assistants": [
-            "user1"
-        ]
-    },
-    {
-        "id": 11,
-        "movie": "Ninja Turtles: Fuera de las sombras",
+        "movie": "Un espía y medio",
         "cine": "Cinesa Plaza de Armas 3D",
-        "date": "2016-08-06T11:02:09.301Z",
-        "hour": "13:2",
-        "assistants": [
-            "user1"
-        ]
-    },
-    {
-        "id": 12,
-        "movie": "Antes de ti",
-        "cine": "Cinesur Nervión",
-        "date": "2016-08-09T09:42:05.129Z",
-        "hour": "14:45",
+        "date": "2016-08-01T22:05:15.320Z",
+        "hour": "0:5",
         "assistants": [
             "user1"
         ]

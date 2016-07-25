@@ -263,6 +263,10 @@
             {
                 "user": "user1",
                 "comment": "comment10"
+            },
+            {
+                "user": "user1",
+                "comment": null
             }
         ],
         "rating": [

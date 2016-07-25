@@ -3,8 +3,11 @@
 <div ng-controller="showEventsController">
 	<div class="container">
 		<div class="row">
+		<div class="page-header">
+		<h1>Calendario <small>de eventos</small></h1>
+	</div>
 			<div class="col-md-6 col-md-offset-3">
-			<h4>Calendario de eventos</h4>
+			
 				<div style="display:inline-block; min-height:290px;">
 					<div  ng-if="events" uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
 				</div>

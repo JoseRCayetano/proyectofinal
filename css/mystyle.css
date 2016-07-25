@@ -175,7 +175,19 @@ form .fa{
   
 }
 
-/* Sub menu user*/
-.nav-tabs{
+/* SUb menu */
+.nav-tabs {
   border-bottom: 0;
+}
+
+/* Ficha movie */
+.glyphicon-star{
+  color: #cec908;
+  font-size: 24px;
+}
+.well, textarea {
+  color: black;
+}
+.btn-primary {
+  background-color: #041b25 !important;
 }

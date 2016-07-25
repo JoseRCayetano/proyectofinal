@@ -1118,6 +1118,10 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
 		$localStorage.users = response;
 	
 	})
+	$http.get("db/events.json").success(function (response){
+		$localStorage.events = response;
+	
+	})
 
 
 	//COnfig carousel
