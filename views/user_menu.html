@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse" ng-controller="menuController">
+<nav id ="top-menu" class="navbar navbar-inverse" ng-controller="menuController">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -15,8 +15,33 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="javascript void(0)"><i class="fa fa-user" aria-hidden="true"></i> {{userlogged}}</a></li>
-				</ul>
+					<li><!--
+						<a href="javascript void(0)">
+							<i class="fa fa-user" aria-hidden="true"></i> {{userlogged}}
+						</a>-->
+						<div class="btn-group hidden-xs">
+							<div class="btn-group ">
+								<a href="bootstrap-elements.html" data-target="#" class="btn btn-raised dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-user" aria-hidden="true"></i> {{userlogged}}
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="javascript:void(0)">Mis eventos</a></li>
+									<li><a href="javascript:void(0)">Mi área personal</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="hidden-sm">
+						<ul class="nav navbar-nav navbar-right visible-xs">
+							<li class="menu-hover"><a href="javascript:void(0)">Mis eventos</a></li>
+							<li class="menu-hover"><a href="javascript:void(0)">Mi área personal</a></li>
+						</ul>
+						</div>
+					</ul>
+
+				</li>
+			</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+ 
