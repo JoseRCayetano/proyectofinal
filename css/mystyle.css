@@ -137,9 +137,16 @@ color: white;
   height: 150px;
   clear:both;
   padding-top:20px;
-  background-color: black;
+  background-color: #21364c;
   margin-top: 0px;
 } 
+
+.footer .fa {
+  font-size: 24px;
+  margin-top: 10px;
+}.footer h2{
+  margin-top: 0px;
+}
 /* user menu */
 .back-user-menu{
   background-color: #4D658D !important;
@@ -179,15 +186,53 @@ form .fa{
 .nav-tabs {
   border-bottom: 0;
 }
+.nav-tabs li {
+  height: 60px;
+}
 
 /* Ficha movie */
 .glyphicon-star{
   color: #cec908;
-  font-size: 24px;
+  font-size: 20px;
 }
 .well, textarea {
   color: black;
 }
 .btn-primary {
   background-color: #041b25 !important;
+}
+
+/* Ranking Style */
+
+#ranking-movie .list-group-item:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+#ranking-movie a:hover{
+  text-decoration: none;
+
+}
+.rating-number {
+  font-size:24px;
+}
+/* Main Style */
+#cartelera {
+  margin-bottom: 10px;
+}
+.input-group {
+  color: black;
+}
+.input-group input{
+
+}
+
+/* Show events */
+.panel-heading{
+  background-color: #467eab!important;
+}
+.panel-heading a:hover,.panel-heading a:focus{
+  text-decoration: none;
+  color: white;
+}
+.panel-body {
+  color: black;
 }

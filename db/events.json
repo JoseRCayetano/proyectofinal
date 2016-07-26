@@ -88,5 +88,15 @@
         "assistants": [
             "user1"
         ]
+    },
+    {
+        "id": 9,
+        "movie": "Money Monster",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-03T14:37:08.873Z",
+        "hour": "16:37",
+        "assistants": [
+            "user1"
+        ]
     }
 ]
