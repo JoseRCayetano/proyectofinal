@@ -50,6 +50,15 @@
                     "Aventura",
                     "Ciencia Ficción"
                 ]
+            },
+            {
+                "title": "Dioses de Egipto",
+                "duration": "97",
+                "genders": [
+                    "Acción",
+                    "Aventura",
+                    "Fantasía"
+                ]
             }
         ]
     },

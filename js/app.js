@@ -130,6 +130,28 @@ app.controller("movieRatingController",["$scope","$http","$localStorage",functio
 }])
 //ShowEventsController
 app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
+/*
+ $http.get('db/events.json').success(function (response){
+		$scope.eventos = response;
+		$scope.events = [];
+		loadEvents(response);
+		 $scope.options = {
+		    customClass: getDayClass,
+		    minDate: new Date(),
+		    showWeeks: true
+ 		 };
+ 		// $route.reload();
+	 		
+
+	});*/
+	$scope.eventos = $localStorage.events;
+	$scope.events = []; //Dates
+	loadEvents($localStorage.events);
+	$scope.options = {
+		customClass: getDayClass,
+		minDate: new Date(),
+		showWeeks: true
+	};
 
 $scope.loadNewEvents = function (){
 	location.reload();
@@ -144,10 +166,12 @@ $scope.checkUserInEvent = function (idEvent){
 }
 //Function ng-click leaveEvent
 $scope.leaveEvent = function (idEvent){
+	//Search user in assistants field of events, and save his position
 	var userIndex = $scope.eventos[idEvent].assistants.map (function (user){
 		return user;
 	}).indexOf($localStorage.user)
 
+	//If exist
 	if (userIndex !== -1){
 		var FormData = {
 			'file': 'events.json',
@@ -222,19 +246,7 @@ $scope.goToEvent = function (idEvent){
   $scope.today();
 
  
-  $http.get('db/events.json').success(function (response){
-		$scope.eventos = response;
-		$scope.events = [];
-		loadEvents(response);
-		 $scope.options = {
-		    customClass: getDayClass,
-		    minDate: new Date(),
-		    showWeeks: true
- 		 };
- 		// $route.reload();
-	 		
-
-	});
+ 
   //$window.location.reload();
 
 /*
@@ -320,6 +332,17 @@ app.controller("createEventController",["$scope","$http","$routeParams","$localS
 				index = 0;
 			}
 			
+			//Save new Event in local
+			var newEvent = {
+				'id':index,
+				'movie':$scope.movie,
+				'cine':$scope.cine,
+				'date':$scope.date,
+				'hour':$scope.time.getHours()+":"+$scope.time.getMinutes(),
+				'assistants':[$scope.user]
+			}
+			$localStorage.events.push(newEvent)
+			//Save new Event in json
 			var FormData = {
 				'file': 'events.json',
 				'action': 'createEvent',
