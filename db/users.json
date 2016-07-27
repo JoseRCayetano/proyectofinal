@@ -5,9 +5,53 @@
         "name": "usuario1",
         "apellido": "apellido1",
         "email": "email1@mail.com",
-        "viewed": [],
-        "bookmark": [],
-        "favorite": []
+        "viewed": [
+            {
+                "title": "Antes de ti",
+                "duration": "110",
+                "genders": [
+                    "Drama",
+                    "Romance"
+                ]
+            }
+        ],
+        "bookmark": [
+            {
+                "title": "Buscando a Dory",
+                "duration": "96",
+                "genders": [
+                    "Acentura",
+                    "Animación",
+                    "Comedia"
+                ]
+            },
+            {
+                "title": "Antes de ti",
+                "duration": "110",
+                "genders": [
+                    "Drama",
+                    "Romance"
+                ]
+            }
+        ],
+        "favorite": [
+            {
+                "title": "Expediente Warren: El Caso Enfield",
+                "duration": "134",
+                "genders": [
+                    "Terror"
+                ]
+            },
+            {
+                "title": "Independence Day: Contraataque",
+                "duration": "120",
+                "genders": [
+                    "Accion",
+                    "Aventura",
+                    "Ciencia Ficción"
+                ]
+            }
+        ]
     },
     {
         "user": "user2",

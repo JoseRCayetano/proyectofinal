@@ -98,5 +98,35 @@
         "assistants": [
             "user1"
         ]
+    },
+    {
+        "id": 10,
+        "movie": "Un espía y medio",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-04T17:13:18.211Z",
+        "hour": "19:13",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 11,
+        "movie": "1944",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-06T17:16:08.158Z",
+        "hour": "19:16",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 12,
+        "movie": "Mi amigo el gigante",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-08T18:34:50.838Z",
+        "hour": "20:34",
+        "assistants": [
+            "user1"
+        ]
     }
 ]

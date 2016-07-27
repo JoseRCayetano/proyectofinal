@@ -24,6 +24,8 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 		templateUrl: "views/showEvents.html"
 	}).when("/movie-rating",{
 		templateUrl: "views/movie-rating.html"
+	}).when("/personal-area",{
+		templateUrl: "views/personal-area.html"
 	})
 	.otherwise({
 		redirectTo: "/",
@@ -36,6 +38,34 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 	});
 
 }]);
+
+app.controller("personalAreaController",["$scope","$localStorage",function ($scope,$localStorage){
+	$scope.cartelera = $localStorage.cartelera;
+
+	$scope.check = function (category,nameMovie){
+		var positionUser = $localStorage.users.map(function (user){
+			return user.user;
+		}).indexOf($localStorage.user);
+
+		console.log(positionUser)
+		if (category === "view"){
+			var index = $localStorage.users[positionUser].viewed.map(function (movie){
+				return movie.title
+			}).indexOf(nameMovie);
+			return index === -1 ? false : true;
+		}else if(category ==="bookmark"){
+			var index = $localStorage.users[positionUser].bookmark.map(function (movie){
+				return movie.title;
+			}).indexOf(nameMovie);
+			return index === -1 ? false :  true;
+		}else{
+			var index = $localStorage.users[positionUser].favorite.map(function (movie){
+				return movie.title;
+			}).indexOf(nameMovie);
+			return index === -1 ?  false : true;
+		}
+	}
+}])
 
 
 
