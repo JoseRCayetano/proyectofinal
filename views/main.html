@@ -1,9 +1,5 @@
 <usermenu></usermenu>
 <navigatorusermenu></navigatorusermenu>
-
-
-	
-
 <div id="cartelera" class="container" ng-controller="mainController">
 	<div class="row">
 		<div class="page-header">
@@ -15,7 +11,6 @@
 		<div class=" col-xs-12  col-lg-6 col-lg-offset-3">
 			<div class="input-group">
 				<span class="input-group-btn">
-					<!--<button class="btn btn-default" type="button">Go!</button>-->
 					<i class="material-icons">search</i> 
 				</span>
 				<input type="text" class="form-control" placeholder="Búsqueda por nombre..." ng-model="search">
@@ -34,24 +29,19 @@
 					<div class="card-image">
 						<a href="#/movie/{{pelicula.title}}"><img ng-src="{{pelicula.img_url}}" class="img-responsive"/></a>
 					</div>
+					
 					<div class="card-body">
-						
 						<ul class="list-unstyled list-inline text-center">
 							<li ng-click="checkFilm('view',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-eye-open" ng-class="{blue: checkViewMovie(pelicula.title)}"></span></li>
 
 							<li ng-click="checkFilm('bookmark',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-bookmark" ng-class="{green: checkBookmarkMovie(pelicula.title)}"></span></li>
 
 							<li ng-click="checkFilm('favorite',pelicula.title,pelicula.duration,pelicula.genders)"><span class="glyphicon glyphicon-heart" ng-class="{red: checkFavoriteMovie(pelicula.title)}"></span></li>
-							
 						</ul>
-
 					</div>
-
 				</div>
 			</article>
 		</div>
-	
 	</div>
-
 </div>
 

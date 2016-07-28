@@ -85,14 +85,14 @@ textarea{
   background-size:100%;
   width:100%;
   height: 100%;
-  min-height: 700px;
+  min-height: 1080px;
 }
 #login {
     background: url('../img/design/login.jpg') fixed center no-repeat;
   background-size:100%;
   width:100%;
   height: 100%;
-  min-height: 700px;
+  min-height: 1080px;
 }
 
 /*

@@ -6,8 +6,7 @@
         "date": "2016-07-22T13:47:14.710Z",
         "hour": "16:47",
         "assistants": [
-            "user2",
-            "user1"
+            "user2"
         ]
     },
     {
@@ -36,6 +35,46 @@
         "cine": "Cinesur Nervión",
         "date": "2016-08-04T18:59:36.852Z",
         "hour": "20:59",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 4,
+        "movie": "Buscando a Dory",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-07-28T10:50:57.397Z",
+        "hour": "11:50",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 4,
+        "movie": "Buscando a Dory",
+        "cine": "Cinesa Plaza de Armas 3D",
+        "date": "2016-08-06T11:36:00.180Z",
+        "hour": "13:36",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 5,
+        "movie": "Antes de ti",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-04T13:57:02.030Z",
+        "hour": "15:57",
+        "assistants": [
+            "user1"
+        ]
+    },
+    {
+        "id": 6,
+        "movie": "Expediente Warren: El Caso Enfield",
+        "cine": "Cinesur Nervión",
+        "date": "2016-08-01T19:39:05.234Z",
+        "hour": "21:39",
         "assistants": [
             "user1"
         ]

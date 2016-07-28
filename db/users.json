@@ -13,6 +13,13 @@
                     "Drama",
                     "Romance"
                 ]
+            },
+            {
+                "title": "Expediente Warren: El Caso Enfield",
+                "duration": "134",
+                "genders": [
+                    "Terror"
+                ]
             }
         ],
         "bookmark": [
@@ -31,6 +38,15 @@
                 "genders": [
                     "Drama",
                     "Romance"
+                ]
+            },
+            {
+                "title": "Ninja Turtles: Fuera de las sombras",
+                "duration": "112",
+                "genders": [
+                    "Accion",
+                    "Aventura",
+                    "Comedia"
                 ]
             }
         ],
@@ -58,6 +74,22 @@
                     "Acción",
                     "Aventura",
                     "Fantasía"
+                ]
+            },
+            {
+                "title": "Antes de ti",
+                "duration": "110",
+                "genders": [
+                    "Drama",
+                    "Romance"
+                ]
+            },
+            {
+                "title": "Un espía y medio",
+                "duration": "114",
+                "genders": [
+                    "Accion",
+                    "Comedia"
                 ]
             }
         ]

@@ -31,17 +31,16 @@ app.config(['$routeProvider','uiGmapGoogleMapApiProvider',function($routeProvide
 		redirectTo: "/",
 		
 	})
-	
-	 
 	GoogleMapApiProviders.configure({
 		china: true
 	});
 
 }]);
-
+//Personal Area controller
 app.controller("personalAreaController",["$scope","$localStorage",function ($scope,$localStorage){
 	$scope.cartelera = $localStorage.cartelera;
 
+	//Function check view / bookmark / favorite
 	$scope.check = function (category,nameMovie){
 		var positionUser = $localStorage.users.map(function (user){
 			return user.user;
@@ -67,20 +66,12 @@ app.controller("personalAreaController",["$scope","$localStorage",function ($sco
 	}
 }])
 
-
-
+// Movie Rating Controller
 app.controller("movieRatingController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
 	
-	/*
-	 $http.get('db/cartelera.json').then(function (response){
-	 		$scope.cartelera =  sumarPuntuacion(response.data);
-		 })*/
 	$scope.cartelera =  sumarPuntuacion($localStorage.cartelera);
-
-
-
+	// Add score
 	function sumarPuntuacion (response){
-		
 		var array = [];
 		response.forEach(function (movie){
 			var mov ={}
@@ -117,34 +108,16 @@ app.controller("movieRatingController",["$scope","$http","$localStorage",functio
 		var arr = [];
 		arr.push(input.slice(0,Math.ceil(input.length/2)))
 		arr.push(input.slice(Math.ceil(input.length/2),input.length))
-		/*
-		for(i = 0; i < input.length; i++) {
-			var colIdx = i % cols;
-			arr[colIdx] = arr[colIdx] || [];
-			arr[colIdx].push(input[i]);
-		}*/
 		console.log(arr)
 		return arr;
 	}
 
 }])
+
 //ShowEventsController
 app.controller("showEventsController",["$scope","$http","$localStorage",function ($scope,$http,$localStorage){
-/*
- $http.get('db/events.json').success(function (response){
-		$scope.eventos = response;
-		$scope.events = [];
-		loadEvents(response);
-		 $scope.options = {
-		    customClass: getDayClass,
-		    minDate: new Date(),
-		    showWeeks: true
- 		 };
- 		// $route.reload();
-	 		
 
-	});*/
-	$scope.eventos = $localStorage.events;
+	$scope.eventos = $localStorage.events; // list events
 	$scope.events = []; //Dates
 	loadEvents($localStorage.events);
 	$scope.options = {
@@ -237,35 +210,12 @@ $scope.goToEvent = function (idEvent){
 
 }
 
-
-
 //Show calendar
- $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
+$scope.today = function() {
+	$scope.dt = new Date();
+};
+$scope.today();
 
- 
- 
-  //$window.location.reload();
-
-/*
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  console.log("--> "+tomorrow);
-  var afterTomorrow = new Date(tomorrow);
-  afterTomorrow.setDate(tomorrow.getDate() + 1);
-  $scope.events = [
-    {
-      date: tomorrow,
-      status: 'full'
-    },
-    {
-      date: afterTomorrow,
-      status: 'partially'
-    }
-  ];
-*/
 
 //Load events inside $scope.events
 function loadEvents(response){
@@ -278,39 +228,40 @@ function loadEvents(response){
 	})
 	
 }
-  function getDayClass(data) {
-    var date = data.date,
-      mode = data.mode;
-    if (mode === 'day') {
-      var dayToCheck = new Date(date).setHours(0,0,0,0);
+	//get class from day
+	function getDayClass(data) {
+		var date = data.date,
+		mode = data.mode;
+		if (mode === 'day') {
+			var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-      for (var i = 0; i < $scope.events.length; i++) {
-        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+			for (var i = 0; i < $scope.events.length; i++) {
+				var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
-        if (dayToCheck === currentDay) {
-          return $scope.events[i].status;
-        }
-      }
-    }
+				if (dayToCheck === currentDay) {
+					return $scope.events[i].status;
+				}
+			}
+		}
 
-    return '';
-  }
+		return '';
+	}
 
 //Show vents
 $scope.oneAtATime = true;
-
-
-  $scope.status = {
-    isCustomHeaderOpen: false,
-    isFirstOpen: true,
-    isFirstDisabled: false
-  };
+$scope.status = {
+	isCustomHeaderOpen: false,
+	isFirstOpen: true,
+	isFirstDisabled: false
+};
   //To show date in pretty format
   $scope.getDate = function  (string){
- 	var date = new Date(string);
- 	return date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+  	var date = new Date(string);
+  	return date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
   }
+
 }])
+
 //user event controller
 app.controller("createEventController",["$scope","$http","$routeParams","$localStorage",function ($scope,$http,$routeParams,$localStorage){
 	$scope.movie = $routeParams.title;
@@ -331,7 +282,6 @@ app.controller("createEventController",["$scope","$http","$routeParams","$localS
 			}else{
 				index = 0;
 			}
-			
 			//Save new Event in local
 			var newEvent = {
 				'id':index,
@@ -355,7 +305,6 @@ app.controller("createEventController",["$scope","$http","$routeParams","$localS
 			};
 			var method = 'POST';
 			var url = 'db/prueba.php';
-
 			$http({
 				method: method,
 				url: url,
@@ -370,10 +319,8 @@ app.controller("createEventController",["$scope","$http","$routeParams","$localS
 			error(function(response) {
 				console.log("mal")
 				$scope.codeStatus = response || "Request failed";
-			});
-			
+			});	
 		})
-		
 	}
 
 
@@ -410,23 +357,14 @@ app.controller("createEventController",["$scope","$http","$routeParams","$localS
 		minDate: new Date(),
 		showWeeks: true
 	};
-	//disable days before today
+	//Disable days before today
 	var tod = new Date();
 	$scope.dateOptions = {
-    //dateDisabled: disabled,
-    formatYear: 'yy',
-    maxDate: new Date(2020, 5, 22),
-    minDate: tod,
-    startingDay: 1
-};
-
-  // Disable weekend selection
-  function disabled(data) {
-  	/*
-  	var date = data.date,
-  	mode = data.mode;
-  	return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);*/
-  }
+	    formatYear: 'yy',
+	    maxDate: new Date(2020, 5, 22),
+	    minDate: tod,
+	    startingDay: 1
+	};
 
   $scope.open1 = function() {
   	$scope.popup1.opened = true;
@@ -486,40 +424,20 @@ app.controller("createEventController",["$scope","$http","$routeParams","$localS
   	return '';
   }
 
-
 }]);
+
 //Cine view controller
 app.controller("cinemaController",["$scope","$http","$routeParams",function ($scope,$http,$routeParams){
-	
+	//Get params from route
 	$scope.title = $routeParams.title;
 	$scope.cine = $routeParams.cine;
 	$scope.dataLoaded = false;
 
-
-	
 	$http.get("db/cartelera.json").success (function (data){
         $scope.cartelera= data;
         $scope.dataLoaded = true;
-        /*
-        var moviePos = getMoviePosition(data,$routeParams.title)
-        var cinePos = getCinePosition(data,moviePos,$routeParams.cine)
-
-        var cine = data[moviePos].cines[cinePos];
-        console.log (cine);
-        $scope.map = { 
-        	center: { 
-        		latitude: cine.long, 
-        		longitude: cine.lat 
-        	}, zoom: 12,
-        	options : {
-        		scrollwheel: true
-        	},
-        	control: {}
-        };*/
     });
-
-
-    //Google map
+    //Google map Center, options and control
     $scope.map = { 
     	center: { 
     		latitude: 37.576399699999996, 
@@ -530,27 +448,29 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
     	},
     	control: {}
     };
+    //Google maps markers
     $scope.marker = {
-			id: 0,
-			coords: {
-				latitude: 37.5555,
-				longitude: -6.1021386
-			},
-			options: {
-				draggable: false
-			}
-		};
- //Get movie position
+    	id: 0,
+    	coords: {
+    		latitude: 37.5555,
+    		longitude: -6.1021386
+    	},
+    	options: {
+    		draggable: false
+    	}
+    };
+
+ 	//Get movie position
     function getMoviePosition (data,movie){
     	return data.map(function(movie){
 				return movie.title;
 			}).indexOf(movie);
     }
+    //Get cinema position
      function getCinePosition (data,moviePos,cine){
     	return data[moviePos].cines.map(function(cine){
     			console.log(cine.name)
 				return cine.name;
-
 			}).indexOf(cine);
     }
 
@@ -559,17 +479,9 @@ app.controller("cinemaController",["$scope","$http","$routeParams",function ($sc
 
 //Controller main page user
 app.controller("mainController",["$scope","$http",'$localStorage',function($scope,$http,$localStorage){
-		
-
+	
 	$scope.dataLoaded = true;
-	/*
-	$http.get("db/cartelera.json").success (function (data){
-		$scope.cartelera= data;
-		$scope.dataLoaded = true;
-
-	});*/
 	$scope.cartelera = $localStorage.cartelera;
-
 
     //Function viewed film
     $scope.checkFilm = function (buttonPressed,movie,duration,genders){
@@ -577,15 +489,14 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
     	var data = $localStorage.users;
     	//$http.get("db/users.json").success(function (data){
 
-    		
     		var userPosition = getUserPosition(data,$localStorage.user);
     		switch (buttonPressed){
     			case 'view':
-    				
-    				var moviePosition = getViewedMoviePosition(data,userPosition,movie);
+
+    			var moviePosition = getViewedMoviePosition(data,userPosition,movie);
 		    		//Si no está lo meto
 		    		if (moviePosition === -1){
-		    			console.log("no esta")
+		    			
 		    			var method = 'POST';
 		    			var url = 'db/prueba.php';
 		    			var FormData = {
@@ -607,15 +518,15 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 							headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
 						}).
 						success(function(response) {
-							console.log("nueva viewd satisfactorio")
+							
 						}).
 						error(function(response) {
-							console.log("mal")
+							
 							$scope.codeStatus = response || "Request failed";
 						});
 
-			    	}else{// si está se elimina
-			    		console.log("si esta");
+			    	}else{// If exists delete
+			
 			    		var method = 'POST';
 			    		var url = 'db/prueba.php';
 			    		var FormData = {
@@ -626,7 +537,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 			    		};
 			    		var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-						//dataBase.send($http,method,url,FormData,headers);
 						$localStorage.users[userPosition].viewed.splice(moviePosition,1);
 						$http({
 							method: method,
@@ -638,7 +548,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 							console.log("eliminacion viewed stisfactorio")
 						}).
 						error(function(response) {
-							console.log("mal")
 							$scope.codeStatus = response || "Request failed";
 						});
 					}
@@ -646,10 +555,8 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
 					case 'bookmark':
 					var moviePosition = getBookmarkMoviePosition(data,userPosition,movie);
-					console.log("bookmark position movie-->"+moviePosition)
-					//Si no está lo meto
-					if (moviePosition === -1){
-						console.log("no esta")
+					//Si not exists, add
+					if (moviePosition === -1){						
 						var method = 'POST';
 						var url = 'db/prueba.php';
 						var FormData = {
@@ -662,7 +569,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 						};
 						var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-						//dataBase.send($http,method,url,FormData,headers);
 						$localStorage.users[userPosition].bookmark.push({"title": movie, "duration": duration, "genders":genders })
 						$http({
 							method: method,
@@ -678,8 +584,7 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 							$scope.codeStatus = response || "Request failed";
 						});
 
-			    	}else{// si está se elimina
-			    		console.log("si esta");
+			    	}else{// if exists delete
 			    		var method = 'POST';
 			    		var url = 'db/prueba.php';
 			    		var FormData = {
@@ -690,7 +595,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 			    		};
 			    		var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-						//dataBase.send($http,method,url,FormData,headers);
 						$localStorage.users[userPosition].bookmark.splice(moviePosition,1);
 						$http({
 							method: method,
@@ -702,14 +606,13 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
 						}).
 						error(function(response) {
-							console.log("mal")
+							
 							$scope.codeStatus = response || "Request failed";
 						});
 					}
 					break;
 					case 'favorite':
 					var moviePosition = getFavoriteMoviePosition (data,userPosition,movie);
-					console.log("Favorite position movie-->"+moviePosition)
 					//Si no está lo meto
 					if (moviePosition === -1){
 						console.log("no esta")
@@ -737,7 +640,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 
 						}).
 						error(function(response) {
-							console.log("mal")
 							$scope.codeStatus = response || "Request failed";
 						});
 
@@ -752,8 +654,6 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 			    			'moviePosition': moviePosition,
 			    		};
 			    		var headers= {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
-
-						//dataBase.send($http,method,url,FormData,headers);
 						$localStorage.users[userPosition].favorite.splice(moviePosition,1);
 						$http({
 							method: method,
@@ -772,9 +672,9 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
 					break;
 
 				}
-			//})
-	
-	}
+			
+
+		}
 
     //Get user poition
     function getUserPosition(data,username){
@@ -846,14 +746,9 @@ app.controller("mainController",["$scope","$http",'$localStorage',function($scop
     		return true;
     	}
     }
-    
-    
-
 }])
 
-
 //Movie file controller
-
 app.controller("movieController",["$scope","$http","$routeParams",'$localStorage', function ($scope,$http,$routeParams,$localStorage){
 	$scope.title = $routeParams.title;
 	$localStorage.movie = $routeParams.title;
@@ -867,8 +762,7 @@ app.controller("movieController",["$scope","$http","$routeParams",'$localStorage
         var positionMovie = data.map (function (movie){
 				return movie.title;
 			}).indexOf($routeParams.title);
-        console.log(data[positionMovie].comments)
-
+      
 		$scope.comments = data[positionMovie].comments;
 
     });
@@ -932,6 +826,7 @@ app.controller("menuController",["$scope","$location",'$localStorage',function($
     };
 }]);
 
+//formRegisterController
 app.controller("formRegisterController" ,['$scope','$http','$location','$localStorage',function ($scope,$http,$location,$localStorage){
 
 	$scope.error = false;
@@ -955,8 +850,6 @@ app.controller("formRegisterController" ,['$scope','$http','$location','$localSt
 				'email': $scope.email
 			};
 
-			//application/json
-			//
 			$http({
 				method: method,
 				url: url,
@@ -993,7 +886,6 @@ app.controller("formRegisterController" ,['$scope','$http','$location','$localSt
 				console.log("esta")
 				return true;
 			}
-		
 	}
 
 }]);
@@ -1011,7 +903,6 @@ app.controller("formLoginController",['$scope','$http','$location','$localStorag
 	}
 
 	function checkInDb(db,user,password){
-		
 		var index = db.map(function (element){
 			return element.user;
 		}).indexOf(user);
@@ -1021,23 +912,16 @@ app.controller("formLoginController",['$scope','$http','$location','$localStorag
 		}else{
 			$scope.error = true;
 		}
-	
 	}
 
 }]);
 
 //Rating controller
-
 app.controller('ratingController',["$scope","$http","$localStorage",function ($scope,$http,$localStorage) {
 	$scope.rate = 0;
 	$scope.max = 10;
 	$scope.isReadonly = false;
 
-	$scope.hoveringOver = function(value) {
-		$scope.overStar = value;
-		$scope.percent = 100 * (value / $scope.max);
-	};
-	
 	$http.get("db/cartelera.json").success(function (data){
 			//Find if user has comment before
 			var positionMovie = data.map(function (movie){
@@ -1060,6 +944,11 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 
 			}
 	})
+
+	$scope.hoveringOver = function(value) {
+		$scope.overStar = value;
+		$scope.percent = 100 * (value / $scope.max);
+	};
 
 	$scope.saveValue = function (rate){
 		//save rating , busco usuario, si esta sobreescribo, si no que meta uno nuevo
@@ -1142,13 +1031,6 @@ app.controller('ratingController',["$scope","$http","$localStorage",function ($s
 
 	}
 
-	/*
-	$scope.$watch('rate', function(value) {
-	  //save rating , busco usuario, si esta sobreescribo, si no que meta uno nuevo
-	 
-
-	});*/
-
 	$scope.ratingStates = [
 	{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
 	{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
@@ -1165,27 +1047,22 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
 	//Load data to localStorage ----------------------------------------
 	$http.get("db/cartelera.json").success(function (response){
 		$localStorage.cartelera = response;
-	
 	})
 	$http.get("db/users.json").success(function (response){
 		$localStorage.users = response;
-	
 	})
 	$http.get("db/events.json").success(function (response){
 		$localStorage.events = response;
-	
 	})
 
-
-	//COnfig carousel
-	$scope.myInterval = false;
+	//Config carousel
+	$scope.myInterval = 5000;
 	$scope.noWrapSlides = false;
 	$scope.active = 0;
 	var slides = $scope.slides = [];
 	var currIndex = 0;
 
 	$scope.addSlide = function() {
-		
 		slides.push({
 			image: 'img/landing_carousel/'+slides.length+".jpg",
 			text: ['Vive la mejor experiencia del cine','Disfruta de las mejores películas','Y de los momentos más épicos','Junto a personas de tus mismos intereses'][slides.length % 4],
@@ -1230,7 +1107,6 @@ app.controller("carouselController",["$scope","$http","$localStorage", function 
   			array[top] = tmp;
   		}
   	}
-
   	return array;
   }
 }])

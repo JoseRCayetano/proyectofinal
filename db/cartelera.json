@@ -33,7 +33,7 @@
             },
             {
                 "user": "user1",
-                "rating": 6
+                "rating": 3
             }
         ],
         "cines": [
@@ -267,12 +267,16 @@
             {
                 "user": "user1",
                 "comment": null
+            },
+            {
+                "user": "user1",
+                "comment": "comment"
             }
         ],
         "rating": [
             {
                 "user": "user1",
-                "rating": 0
+                "rating": 6
             }
         ],
         "cines": [
@@ -481,12 +485,16 @@
             {
                 "user": "user1",
                 "comment": "ewrwerwer"
+            },
+            {
+                "user": "user1",
+                "comment": "wqeqweqwe"
             }
         ],
         "rating": [
             {
                 "user": "user1",
-                "rating": 2
+                "rating": 7
             }
         ],
         "cines": [
@@ -1074,9 +1082,18 @@
             {
                 "user": "user1",
                 "comment": "werwerwerwer"
+            },
+            {
+                "user": "user1",
+                "comment": "rwerwer"
             }
         ],
-        "rating": [],
+        "rating": [
+            {
+                "user": "user1",
+                "rating": 10
+            }
+        ],
         "cines": [
             {
                 "name": "Cinesa Plaza de Armas 3D",
@@ -1665,7 +1682,16 @@
             "Fantasía"
         ],
         "comments": [],
-        "rating": [],
+        "rating": [
+            {
+                "user": "user1",
+                "rating": 6
+            },
+            {
+                "user": "user1",
+                "rating": 5
+            }
+        ],
         "cines": [
             {
                 "name": "Cinesur Nervión",
@@ -2377,7 +2403,7 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 9
+                "rating": 1
             }
         ],
         "cines": [
@@ -2529,7 +2555,7 @@
         "rating": [
             {
                 "user": "user1",
-                "rating": 10
+                "rating": 2
             }
         ],
         "cines": [
